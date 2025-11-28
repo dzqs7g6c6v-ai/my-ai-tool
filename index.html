@@ -481,10 +481,83 @@
             margin: 10px 0;
         }
         
+        /* 工具背景板块 */
+        .tool-background {
+            display: flex;
+            gap: 40px;
+            margin: 50px 0;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+        
+        .background-content {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(10, 10, 30, 0.7);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            border: 2px solid rgba(0, 255, 255, 0.3);
+        }
+        
+        .background-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #00ffff;
+            text-align: center;
+        }
+        
+        .background-description {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+        
+        .background-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .background-stat {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .background-stat:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+        
+        .stat-percentage {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #00ffff;
+            min-width: 80px;
+            text-shadow: 0 0 10px #00ffff;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            text-align: left;
+        }
+        
+        .timeline-section {
+            flex: 1;
+            min-width: 300px;
+        }
+        
         .timeline {
             width: 100%;
             max-width: 700px;
-            margin: 40px auto;
+            margin: 0 auto;
             position: relative;
         }
         
@@ -701,6 +774,10 @@
                 font-size: 4rem;
             }
             
+            .tool-background {
+                flex-direction: column;
+            }
+            
             .timeline::before {
                 left: 20px;
             }
@@ -732,13 +809,13 @@
         }
         
         .loopy-face {
-            width: 160px;
-            height: 160px;
+            width: 140px;
+            height: 140px;
             background: #ffe4e6;
             border-radius: 50%;
             position: absolute;
-            top: 20px;
-            left: 20px;
+            top: 30px;
+            left: 30px;
         }
         
         .loopy-ear {
@@ -747,26 +824,27 @@
             background: #ff9ec0;
             border-radius: 50%;
             position: absolute;
-            top: -30px;
+            top: -20px;
+            z-index: 1;
         }
         
         .loopy-ear-left {
-            left: 30px;
+            left: 25px;
             transform: rotate(-15deg);
         }
         
         .loopy-ear-right {
-            right: 30px;
+            right: 25px;
             transform: rotate(15deg);
         }
         
         .loopy-eye {
-            width: 30px;
-            height: 40px;
+            width: 25px;
+            height: 35px;
             background: #333;
             border-radius: 50%;
             position: absolute;
-            top: 70px;
+            top: 60px;
         }
         
         .loopy-eye-left {
@@ -778,42 +856,42 @@
         }
         
         .loopy-eye-sparkle {
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
             background: white;
             border-radius: 50%;
             position: absolute;
-            top: 5px;
+            top: 8px;
             left: 5px;
         }
         
         .loopy-nose {
-            width: 25px;
-            height: 15px;
+            width: 20px;
+            height: 12px;
             background: #ff6b9c;
             border-radius: 50%;
             position: absolute;
             bottom: 50px;
-            left: 87px;
+            left: 90px;
         }
         
         .loopy-mouth {
-            width: 40px;
-            height: 20px;
+            width: 35px;
+            height: 15px;
             border-bottom: 3px solid #ff6b9c;
             border-radius: 0 0 20px 20px;
             position: absolute;
-            bottom: 30px;
-            left: 80px;
+            bottom: 35px;
+            left: 82px;
         }
         
         .loopy-blush {
-            width: 25px;
-            height: 15px;
+            width: 20px;
+            height: 12px;
             background: rgba(255, 182, 193, 0.5);
             border-radius: 50%;
             position: absolute;
-            top: 85px;
+            top: 75px;
         }
         
         .loopy-blush-left {
@@ -975,29 +1053,56 @@
                     <p>AI tool开发者 / 超级活人</p>
                 </div>
                 
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-content">
-                            <div class="timeline-date">2025年10月初</div>
-                            <p>开始使用AI Cedric开发工具</p>
+                <!-- 工具背景板块 -->
+                <h2>工具背景</h2>
+                <div class="tool-background">
+                    <div class="background-content">
+                        <div class="background-title">US Team CIB Task 现状</div>
+                        <div class="background-description">
+                            US Team的CIB Task过程中每天日常流程的重复劳动居多，信息来源多样，查询时间占用多。
+                        </div>
+                        <div class="background-stats">
+                            <div class="background-stat">
+                                <div class="stat-percentage">40%</div>
+                                <div class="stat-label">邮件往来</div>
+                            </div>
+                            <div class="background-stat">
+                                <div class="stat-percentage">25%</div>
+                                <div class="stat-label">Focal Report</div>
+                            </div>
+                            <div class="background-stat">
+                                <div class="stat-percentage">30%</div>
+                                <div class="stat-label">查询时间</div>
+                            </div>
                         </div>
                     </div>
-                    <div class="timeline-item">
-                        <div class="timeline-content">
-                            <div class="timeline-date">2025年10月中旬</div>
-                            <p>对工具进行迭代设计</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-content">
-                            <div class="timeline-date">2025年10月底</div>
-                            <p>正式开始测试工具</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-content">
-                            <div class="timeline-date">2025年11月</div>
-                            <p>正在升级工具</p>
+                    
+                    <div class="timeline-section">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <div class="timeline-date">2025年10月初</div>
+                                    <p>开始使用AI Cedric开发工具</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <div class="timeline-date">2025年10月中旬</div>
+                                    <p>对工具进行迭代设计</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <div class="timeline-date">2025年10月底</div>
+                                    <p>正式开始测试工具</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <div class="timeline-date">2025年11月</div>
+                                    <p>正在升级工具</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
