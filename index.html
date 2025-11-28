@@ -272,8 +272,8 @@
         
         .avatar-container {
             position: relative;
-            width: 220px;
-            height: 220px;
+            width: 280px; /* 放大头像容器 */
+            height: 280px; /* 放大头像容器 */
             margin-bottom: 20px;
         }
         
@@ -320,30 +320,6 @@
             border-radius: 20px;
             font-size: 0.9rem;
             border: 1px solid rgba(0, 255, 255, 0.3);
-        }
-        
-        .profile-stats {
-            display: flex;
-            gap: 30px;
-        }
-        
-        .stat-box {
-            text-align: center;
-            padding: 15px;
-        }
-        
-        .stat-number {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #00ffff;
-            display: block;
-            text-shadow: 0 0 10px #00ffff;
-        }
-        
-        .stat-label {
-            font-size: 0.9rem;
-            color: #a0a0ff;
-            margin-top: 5px;
         }
         
         /* 工具背景和时间线部分 */
@@ -486,8 +462,8 @@
         
         /* Loopy卡通头像样式 - 调整版 */
         .loopy-avatar {
-            width: 220px;
-            height: 220px;
+            width: 280px; /* 放大头像 */
+            height: 280px; /* 放大头像 */
             border-radius: 50%;
             background: linear-gradient(135deg, #ff9ec0, #ff6b9c);
             position: relative;
@@ -497,97 +473,97 @@
         }
         
         .loopy-face {
-            width: 160px;
-            height: 160px;
+            width: 200px; /* 调整脸部大小 */
+            height: 200px; /* 调整脸部大小 */
             background: #ffe4e6;
             border-radius: 50%;
             position: absolute;
-            top: 30px;
-            left: 30px;
+            top: 40px; /* 调整位置 */
+            left: 40px; /* 调整位置 */
         }
         
         .loopy-ear {
-            width: 70px;
-            height: 90px;
+            width: 80px; /* 调整耳朵大小 */
+            height: 100px; /* 调整耳朵大小 */
             background: #ff9ec0;
             border-radius: 50%;
             position: absolute;
-            top: -25px;
+            top: -30px; /* 调整位置 */
             z-index: 1;
         }
         
         .loopy-ear-left {
-            left: 20px;
+            left: 25px; /* 调整位置 */
             transform: rotate(-15deg);
         }
         
         .loopy-ear-right {
-            right: 20px;
+            right: 25px; /* 调整位置 */
             transform: rotate(15deg);
         }
         
         .loopy-eye {
-            width: 28px;
-            height: 38px;
+            width: 32px; /* 调整眼睛大小 */
+            height: 42px; /* 调整眼睛大小 */
             background: #333;
             border-radius: 50%;
             position: absolute;
-            top: 65px;
+            top: 75px; /* 调整位置 */
         }
         
         .loopy-eye-left {
-            left: 50px;
+            left: 60px; /* 调整位置 */
         }
         
         .loopy-eye-right {
-            right: 50px;
+            right: 60px; /* 调整位置 */
         }
         
         .loopy-eye-sparkle {
-            width: 9px;
-            height: 9px;
+            width: 10px; /* 调整高光大小 */
+            height: 10px; /* 调整高光大小 */
             background: white;
             border-radius: 50%;
             position: absolute;
-            top: 10px;
-            left: 6px;
+            top: 12px; /* 调整位置 */
+            left: 7px; /* 调整位置 */
         }
         
         .loopy-nose {
-            width: 22px;
-            height: 14px;
+            width: 24px; /* 调整鼻子大小 */
+            height: 16px; /* 调整鼻子大小 */
             background: #ff6b9c;
             border-radius: 50%;
             position: absolute;
-            bottom: 55px;
-            left: 99px;
+            bottom: 65px; /* 调整位置 */
+            left: 128px; /* 调整位置 */
         }
         
         .loopy-mouth {
-            width: 38px;
-            height: 18px;
+            width: 42px; /* 调整嘴巴大小 */
+            height: 20px; /* 调整嘴巴大小 */
             border-bottom: 3px solid #ff6b9c;
             border-radius: 0 0 20px 20px;
             position: absolute;
-            bottom: 40px;
-            left: 91px;
+            bottom: 50px; /* 调整位置 */
+            left: 119px; /* 调整位置 */
         }
         
         .loopy-blush {
-            width: 22px;
-            height: 14px;
+            width: 26px; /* 调整腮红大小 */
+            height: 16px; /* 调整腮红大小 */
             background: rgba(255, 182, 193, 0.5);
             border-radius: 50%;
             position: absolute;
-            top: 80px;
+            top: 90px; /* 调整位置 */
         }
         
         .loopy-blush-left {
-            left: 35px;
+            left: 45px; /* 调整位置 */
         }
         
         .loopy-blush-right {
-            right: 35px;
+            right: 45px; /* 调整位置 */
         }
         
         /* Python工具页面样式 */
@@ -1015,10 +991,6 @@
                 flex-direction: column;
                 text-align: center;
             }
-            
-            .profile-stats {
-                justify-content: center;
-            }
         }
         
         @media (max-width: 768px) {
@@ -1053,6 +1025,33 @@
             
             .monster {
                 font-size: 4rem;
+            }
+            
+            .avatar-container {
+                width: 220px;
+                height: 220px;
+            }
+            
+            .loopy-avatar {
+                width: 220px;
+                height: 220px;
+            }
+            
+            .loopy-face {
+                width: 160px;
+                height: 160px;
+                top: 30px;
+                left: 30px;
+            }
+            
+            .loopy-nose {
+                bottom: 55px;
+                left: 98px;
+            }
+            
+            .loopy-mouth {
+                bottom: 40px;
+                left: 89px;
             }
         }
     </style>
@@ -1113,20 +1112,6 @@
                                     <div class="loopy-blush loopy-blush-left"></div>
                                     <div class="loopy-blush loopy-blush-right"></div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="profile-stats">
-                            <div class="stat-box">
-                                <span class="stat-number">50+</span>
-                                <div class="stat-label">项目完成</div>
-                            </div>
-                            <div class="stat-box">
-                                <span class="stat-number">96%</span>
-                                <div class="stat-label">成功率</div>
-                            </div>
-                            <div class="stat-box">
-                                <span class="stat-number">2年</span>
-                                <div class="stat-label">经验</div>
                             </div>
                         </div>
                     </div>
