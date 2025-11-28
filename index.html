@@ -55,7 +55,7 @@
         }
 
         .nav-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 1rem 2rem;
             display: flex;
@@ -93,7 +93,7 @@
 
         /* 主容器 */
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 2rem;
             position: relative;
@@ -160,6 +160,7 @@
         .profile-info p {
             color: var(--gray);
             margin-bottom: 0.5rem;
+            font-size: 1.1rem;
         }
 
         /* 时间线样式 */
@@ -183,21 +184,77 @@
             margin-bottom: 0.5rem;
         }
 
-        /* 按钮样式 */
-        .tech-button {
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            border: none;
-            padding: 0.8rem 2rem;
-            color: var(--dark);
-            border-radius: 25px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        /* 冒险主题样式 */
+        .adventure-container {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
         }
 
-        .tech-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 242, 254, 0.2);
+        .character {
+            font-size: 8rem;
+            margin: 30px 0;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .monster {
+            font-size: 6rem;
+            margin: 40px 0;
+            animation: shake 0.5s ease-in-out infinite;
+        }
+
+        .treasure {
+            font-size: 8rem;
+            margin: 40px 0;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        .story-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 30px auto;
+            color: var(--light);
+        }
+
+        .battle-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 40px 0;
+        }
+
+        .problem, .solution {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* 动画效果 */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        @keyframes glow {
+            0%, 100% { 
+                transform: scale(1);
+                text-shadow: 0 0 20px var(--primary);
+            }
+            50% { 
+                transform: scale(1.1);
+                text-shadow: 0 0 30px var(--primary);
+            }
         }
 
         /* 数据展示 */
@@ -216,19 +273,9 @@
         }
 
         .data-number {
-            font-size: 2rem;
+            font-size: 2.5rem;
             color: var(--primary);
             margin-bottom: 0.5rem;
-        }
-
-        /* 动画效果 */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .animate-fade-in {
-            animation: fadeIn 0.6s ease forwards;
         }
 
         /* 响应式设计 */
@@ -270,7 +317,7 @@
 
     <!-- 关于我页面 -->
     <section id="about">
-        <div class="container animate-fade-in">
+        <div class="container">
             <div class="profile">
                 <img src="./profile.png" alt="Profile" class="profile-image">
                 <div class="profile-info">
@@ -281,7 +328,7 @@
                 </div>
             </div>
 
-            <div class="timelinline">
+            <div class="timeline">
                 <div class="timeline-item">
                     <div class="timeline-date">2025年10月初</div>
                     <p>开始使用AI Cedric开发工具</p>
@@ -292,7 +339,6 @@
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-date">2025年10月底</div>
-  
                     <p>正式开始测试工具</p>
                 </div>
                 <div class="timeline-item">
@@ -305,32 +351,57 @@
 
     <!-- Python工具页面 -->
     <section id="python">
-        <div class="container animate-fade-in">
-            <h2 class="section-title">Python工具开发</h2>
-            <div class="tech-card">
-                   <h3>AI 自动化工具</h3>
+        <div class="container">
+               <h2 class="section-title">Python工具开发</h2>
+            
+            <!-- 冒险主题内容 -->
+            <div class="adventure-container">
+                <div class="character">⚔️</div>
+                <h1>AI冒险之旅</h1>
+                <p class="story-text">勇敢的开发者啊，你即将踏上一次非凡的旅程！<br>在这个数字世界中，你将面对挑战、学习魔法（代码），最终获得改变世界的宝藏。</p>
+                
+                <div class="battle-info">
+                    <div class="problem">
+                        <h3>🐉 挑战</h3>
+                        <p>动态加载的网页元素</p>
+                        <p>复杂多变的页面结构</p>
+                        <p>缺乏唯一标识符</p>
+                        <p><strong>初期成功率：仅30%</strong></p>
+                    </div>
+                    
+                    <div class="solution">
+                        <h3>⚔️ 解决方案</h3>
+                        <p>XPath精准定位术</p>
+                        <p>父级元素辅助定位</p>
+                        <p>智能选择器策略</p>
+                        <p><strong>最终成功率：98%</strong></p>
+                    </div>
+                </div>
+
+                <div class="monster">👾</div>
+                <div class="treasure">🏆</div>
+                
                 <div class="data-display">
                     <div class="data-item">
-                        <div class="data-number">98%</div>
+                        <div class="data-number">50+</div>
+                        <p>用户覆盖</p>
+                    </div>
+                    <div class="data-item">
+                        <div class="data-number">96%</div>
                         <p>准确率</p>
                     </div>
                     <div class="data-item">
                         <div class="data-number">500+</div>
-                        <p>工时节省</p>
-                    </div>
-                    <div class="data-item">
-                        <  <div class="data-number">50+</div>
-                        <p>用户数量</p>
+                        <p>每月节省小时</p>
                     </div>
                 </div>
-                <button class="tech-button">查看详情</button>
             </div>
         </div>
     </section>
 
     <!-- 成果展示页面 -->
     <section id="showcase">
-        <div class="container animate-fade-in">
+        <div class="container">
             <h2 class="section-title">成果展示</h2>
             <div class="tech-card">
                 <div style="aspect-ratio: 16/9; background: rgba(255,255,255,0.05); 
@@ -351,7 +422,7 @@
 
     <!-- VBA工具页面 -->
     <section id="vba">
-        <div class="container animate-fade-in">
+        <div class="container">
             <h2 class="section-title">VBA工具</h2>
             <div class="tech-card">
                 <div style="height: 400px; background: rgba(255,255,255,0.05); 
@@ -365,10 +436,10 @@
 
     <!-- 展望未来页面 -->
     <section id="future">
-        <div class="container animate-fade-in">
+        <div class="container">
             <h2 class="section-title">实现从"0"到"1"的跨越</h2>
             <div class="tech-card">
-                <p style="color: var(--gray); margin-bottom: 1.5rem;">
+                <p style="color: var(--gray); margin-bottom: 1.5rem; font-size: 1.2rem;">
                     未来，我们将继续探索AI的无限可能
                 </p>
                 <div class="data-display">
@@ -398,23 +469,6 @@
                     behavior: 'smooth'
                 });
             });
-        });
-
-        // 监听滚动显示动画
-        const observerOptions = {
-            threshold: 0.1
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-fade-in');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('section').forEach(section => {
-            observer.observe(section);
         });
 
         // 导航栏active状态
