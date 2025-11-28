@@ -3,297 +3,440 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cyberpunk Style Preview</title>
+    <title>Cara Song - AI Tool Developer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --neon-pink: #ff2d55;
-            --neon-blue: #0ff;
-            --neon-yellow: #f0f;
-            --dark: #090415;
-            --glitch-speed: 0.5s;
+            --primary: #00f2fe;
+            --secondary: #4facfe;
+            --dark: #1a1f35;
+            --light: #ffffff;
+            --gray: #94a3b8;
+            --card-bg: rgba(255, 255, 255, 0.05);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Orbitron', sans-serif;
+            font-family: 'Inter', sans-serif;
         }
-
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap');
 
         body {
-            background: var(--dark);
-            color: #fff;
+            background: linear-gradient(135deg, var(--dark), #2a2f45);
+            color: var(--light);
+            line-height: 1.6;
             overflow-x: hidden;
-            min-height: 100vh;
         }
 
-        /* 故障背景效果 */
-        .glitch-bg {
+        /* 背景网格效果 */
+        .bg-grid {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: repeating-linear-gradient(
-                0deg,
-                rgba(0, 0, 0, 0.15) 0px,
-                rgba(0, 0, 0, 0.15) 1px,
-                transparent 1px,
-                transparent 2px
-            );
-            pointer-events: none;
-            z-index: 1;
-            animation: scan 8s linear infinite;
+            background-image: 
+                linear-gradient(to right, rgba(79, 172, 254, 0.1) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(79, 172, 254, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 0;
         }
 
+        /* 导航栏 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 31, 53, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+        }
+
+        .nav-link {
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* 主容器 */
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
             position: relative;
-            z-index: 2;
+            z-index: 1;
         }
 
-        /* 赛博朋克卡片 */
-        .cyber-card {
-            background: rgba(9, 4, 21, 0.8);
-            border: 2px solid var(--neon-pink);
-            border-radius: 5px;
+        /* 页面部分 */
+        section {
+            padding: 100px 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        /* 卡片样式 */
+        .tech-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
             padding: 2rem;
-            margin: 2rem 0;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 0 20px rgba(255, 45, 85, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .cyber-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(
-                45deg,
-                transparent,
-                rgba(255, 45, 85, 0.1),
-                transparent
-            );
-            transform: rotate(45deg);
-            animation: glitch-sweep 3s linear infinite;
+        .tech-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 242, 254, 0.1);
         }
 
-        /* 霓虹标题 */
-        .cyber-title {
+        /* 标题样式 */
+        .section-title {
             font-size: 2.5rem;
-            color: var(--neon-pink);
-            text-shadow: 
-                0 0 5px var(--neon-pink),
-                0 0 10px var(--neon-pink),
-                0 0 20px var(--neon-pink);
-            margin-bottom: 1.5rem;
-            position: relative;
+            margin-bottom: 2rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             display: inline-block;
         }
 
-        .cyber-title::before {
-            content: attr(data-text);
-            position: absolute;
-            left: -2px;
-            text-shadow: 2px 0 var(--neon-blue);
-            animation: glitch-text var(--glitch-speed) infinite;
-            clip: rect(44px, 450px, 56px, 0);
+        /* 个人资料样式 */
+        .profile {
+            display: flex;
+            align-items: flex-start;
+            gap: 4rem;
+            margin-bottom: 3rem;
         }
 
-        .cyber-title::after {
-            content: attr(data-text);
-            position: absolute;
-            left: 2px;
-            text-shadow: -2px 0 var(--neon-yellow);
-            animation: glitch-text var(--glitch-speed) infinite;
-            clip: rect(44px, 450px, 56px, 0);
-            animation-delay: calc(var(--glitch-speed) / 2);
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 242, 254, 0.1);
         }
 
-        /* 数据显示区域 */
-        .cyber-data {
-            background: rgba(255, 45, 85, 0.1);
-            border-left: 4px solid var(--neon-pink);
-            padding: 1rem;
-            margin: 1rem 0;
-            font-family: 'Courier New', monospace;
+        .profile-info h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--light);
         }
 
-        .cyber-data p {
- {
-            color: var(--neon-blue);
-            margin: 0.5rem 0;
-            text-shadow: 0 0 5px var(--neon-blue);
+        .profile-info p {
+            color: var(--gray);
+            margin-bottom: 0.5rem;
         }
 
-        /* 赛博按钮 */
-        .cyber-button {
-            background: transparent;
-            border: 2px solid var(--neon-pink);
-            color: var(--neon-pink);
-            padding: 0.8rem 2rem;
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+        /* 时间线样式 */
+        .timeline {
             position: relative;
-            cursor: pointer;
-            overflow: hidden;
-            transition: all 0.3s;
-            margin-top: 1rem;
+            margin-top: 3rem;
         }
 
-        .cyber-button:hover {
-            background: var(--neon-pink);
+        .timeline-item {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+        }
+
+        .timeline-date {
+            color: var(--primary);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* 按钮样式 */
+        .tech-button {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border: none;
+            padding: 0.8rem 2rem;
             color: var(--dark);
-            box-shadow: 0 0 20px var(--neon-pink);
+            border-radius: 25px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .cyber-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                rgba(255, 255, 255, 0.4),
-                transparent
-            );
-            transition: 0.5s;
+        .tech-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 242, 254, 0.2);
         }
 
-        .cyber-button:hover::before {
-            left: 100%;
+        /* 数据展示 */
+        .data-display {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .data-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .data-number {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
         }
 
         /* 动画效果 */
-        @keyframes scan {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(100vh); }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes glitch-text {
-            0% { clip: rect(44px, 450px, 56px, 0); }
-            5% { clip: rect(35px, 450px, 35px, 0); }
-            10% { clip: rect(85px, 450px, 13px, 0); }
-            15% { clip: rect(80px, 450px, 29px, 0); }
-            20% { clip: rect(32px, 450px, 11px, 0); }
-            25% { clip: rect(94px, 450px, 46px, 0); }
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease forwards;
         }
 
-        @keyframes glitch-sweep {
-            0% { transform: translate(-50%, -50%) rotate(45deg); }
-            100% { transform: translate(50%, 50%) rotate(45deg); }
-        }
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .profile {
+                flex-direction: column;
+                text-align: center;
+                gap: 2rem;
+            }
 
-        /* 装饰元素 */
-        .corner-decoration {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--neon-pink);
-        }
+            .profile-image {
+                margin: 0 auto;
+            }
 
-        .corner-decoration.top-left {
-            top: 0;
-            left: 0;
-            border-right: none;
-            border-bottom: none;
-        }
+            .nav-container {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
 
-        .corner-decoration.top-right {
-            top: 0;
-            right: 0;
-            border-left: none;
-            border-bottom: none;
-        }
-
-        .corner-decoration.bottom-left {
-            bottom: 0;
-            left: 0;
-            border-right: none;
-            border-top: none;
-        }
-
-        .corner-decoration.bottom-right {
-            bottom: 0;
-            right: 0;
-            border-left: none;
-            border-top: none;
+            .section-title {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="glitch-bg"></div>
+    <div class="bg-grid"></div>
 
-    <div class="container">
-        <div class="cyber-card">
-            <div class="corner-decoration top-left"></div>
-            <div class="corner-decoration top-right"></div>
-            <div class="corner-decoration bottom-left"></div>
-            <div class="corner-decoration bottom-right"></div>
-
-            <h2 class="cyber-title" data-text="SYSTEM://INIT">SYSTEM://INIT</h2>
-            <div class="cyber-data">
-                <p>> 初始化系统核心...</p>
-                <p>> 加载神经网络模型...</p>
-                <p>> 建立量子通信链接...</p>
-            </div>
-            <button class="cyber-button">Access_Mainframe</button>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#about" class="nav-link">关于我</a>
+            <a href="#python" class="nav-link">Python工具</a>
+            <a href="#showcase" class="nav-link">成果展示</a>
+            <a href="#vba" class="nav-link">VBA工具</a>
+            <a href="#future" class="nav-link">展望未来</a>
         </div>
+    </nav>
 
-        <div class="cyber-card">
-            <div class="corner-decoration top-left"></div>
-            <div class="corner-decoration top-right"></div>
-            <div class="corner-decoration bottom-left"></div>
-            <div class="corner-decoration bottom-right"></div>
-
-            <h2 class="cyber-title" data-text="DATA://STREAM">DATA://STREAM</h2>
-            <div class="cyber-data">
-                <p>> 数据流速率: 1.21 TB/s</p>
-                <p>> 神经元响应: 0.003ms</p>
-                <p>> 量子态稳定性: 99.9%</p>
+    <!-- 关于我页面 -->
+    <section id="about">
+        <div class="container animate-fade-in">
+            <div class="profile">
+                <img src="./profile.png" alt="Profile" class="profile-image">
+                <div class="profile-info">
+                    <h1>Cara Song</h1>
+                    <p>来自US Team</p>
+                    <p>AI tool开发者</p>
+                    <p>超级活人</p>
+                </div>
             </div>
-            <button class="cyber-button">Enter_Matrix</button>
+
+            <div class="timelinline">
+                <div class="timeline-item">
+                    <div class="timeline-date">2025年10月初</div>
+                    <p>开始使用AI Cedric开发工具</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2025年10月中旬</div>
+                    <p>对工具进行迭代设计</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2025年10月底</div>
+  
+                    <p>正式开始测试工具</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2025年11月</div>
+                    <p>正在升级工具</p>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
+
+    <!-- Python工具页面 -->
+    <section id="python">
+        <div class="container animate-fade-in">
+            <h2 class="section-title">Python工具开发</h2>
+            <div class="tech-card">
+                   <h3>AI 自动化工具</h3>
+                <div class="data-display">
+                    <div class="data-item">
+                        <div class="data-number">98%</div>
+                        <p>准确率</p>
+                    </div>
+                    <div class="data-item">
+                        <div class="data-number">500+</div>
+                        <p>工时节省</p>
+                    </div>
+                    <div class="data-item">
+                        <  <div class="data-number">50+</div>
+                        <p>用户数量</p>
+                    </div>
+                </div>
+                <button class="tech-button">查看详情</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 成果展示页面 -->
+    <section id="showcase">
+        <div class="container animate-fade-in">
+            <h2 class="section-title">成果展示</h2>
+            <div class="tech-card">
+                <div style="aspect-ratio: 16/9; background: rgba(255,255,255,0.05); 
+                     border-radius: 8px; margin-bottom: 1rem; display: flex; 
+                     align-items: center; justify-content: center;">
+                    视频展示区域 1
+                </div>
+            </div>
+            <div class="tech-card">
+                <div style="aspect-ratio: 16/9; background: rgba(255,255,255,0.05); 
+                     border-radius: 8px; margin-bottom: 1rem; display: flex; 
+                     align-items: center; justify-content: center;">
+                    视频展示区域 2
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VBA工具页面 -->
+    <section id="vba">
+        <div class="container animate-fade-in">
+            <h2 class="section-title">VBA工具</h2>
+            <div class="tech-card">
+                <div style="height: 400px; background: rgba(255,255,255,0.05); 
+                     border-radius: 8px; display: flex; align-items: center; 
+                     justify-content: center;">
+                    流程图展示区域
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 展望未来页面 -->
+    <section id="future">
+        <div class="container animate-fade-in">
+            <h2 class="section-title">实现从"0"到"1"的跨越</h2>
+            <div class="tech-card">
+                <p style="color: var(--gray); margin-bottom: 1.5rem;">
+                    未来，我们将继续探索AI的无限可能
+                </p>
+                <div class="data-display">
+                    <div class="data-item">
+                        <h4>开发更智能的工具</h4>
+                        <p>提升自动化程度</p>
+                    </div>
+                    <div class="data-item">
+                        <h4>优化用户体验</h4>
+                        <p>提供更直观的界面</p>
+                    </div>
+                    <div class="data-item">
+                        <h4>扩展应用场景</h4>
+                        <p>覆盖更多业务领域</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <script>
-        // 添加故障效果
-        function createGlitchEffect() {
-            document.querySelectorAll('.cyber-title').forEach(title => {
-                setInterval(() => {
-                    title.style.textShadow = `
-                        ${Math.random() * 10}px ${Math.random() * 10}px ${Math.random() * 30}px var(--neon-pink),
-                        ${Math.random() * -10}px ${Math.random() * 10}px ${Math.random() * 30}px var(--neon-blue)
-                    `;
-                }, 50);
-            });
-        }
-
-        // 鼠标移动效果
-        document.addEventListener('mousemove', (e) => {
-            const cards = document.querySelectorAll('.cyber-card');
-            cards.forEach(card => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-
-                card.style.setProperty('--mouse-x', `${x}px`);
-                card.style.setProperty('--mouse-y', `${y}px`);
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
             });
         });
 
-        createGlitchEffect();
+        // 监听滚动显示动画
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // 导航栏active状态
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 60) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
     </script>
 </body>
 </html>
