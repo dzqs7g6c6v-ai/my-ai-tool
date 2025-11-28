@@ -3,238 +3,276 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Matrix Style Preview</title>
+    <title>Futuristic Style Preview</title>
     <style>
         :root {
-            --primary-color: #0f0;
-            --secondary-color: #00ff95;
-            --bg-dark: #000;
-            --text-light: #fff;
-            --matrix-color: rgba(0, 255, 0, 0.7);
+            --primary: #4facfe;
+            --secondary: #00f2fe;
+            --accent: #7d5fff;
+            --dark: #1a1f35;
+            --light: #ffffff;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
         }
 
         body {
-            background: var(--bg-dark);
-            color: var(--text-light);
-            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, var(--dark), #2a2f45);
+            color: var(--light);
             min-height: 100vh;
             overflow-x: hidden;
         }
 
-        /* 矩阵雨效果 */
-        #matrix-rain {
-            position: fixeixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-
-        /* 主容器 */
         .container {
-            position: relative;
-            z-index: 2;
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
         }
 
-        /* 科技风格卡片 */
-        .tech-card {
-            background: rgba(0, 0, 0, 0.7);
-            border: 1px solid var(--primary-color);
-            border-radius: 5px;
+        /* 发光线条背景 */
+        .light-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(to right, rgba(79, 172, 254, 0.1) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(79, 172, 254, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 0;
+        }
+
+        /* 未来主义卡片 */
+        .future-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
             padding: 2rem;
             margin: 2rem 0;
             position: relative;
             overflow: hidden;
-            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transform: perspective(1000px) rotateX(5deg);
+            transition: all 0.3s ease;
         }
 
-        .tech-card::before {
+        .future-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .future-card:hover::before {
+            left: 100%;
+        }
+
+        .future-card:hover {
+            transform: perspective(1000px) rotateX(0deg);
+            box-shadow: 0 0 30px rgba(79, 172, 254, 0.3);
+        }
+
+        /* 标题样式 */
+        .future-title {
+            font-size: 2.5rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .future-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), transparent);
+        }
+
+        /* 未来主义按钮 */
+        .future-button {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border: none;
+            border-radius: 25px;
+            padding: 12px 30px;
+            color: var(--light);
+            font-size: 1rem;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            margin: 1rem 0;
+        }
+
+        .future-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                   rgba(255, 255, 255, 0.4),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .future-button:hover::before {
+            left: 100%;
+        }
+
+        /* 数据显示区域 */
+        .data-display {
+            background: rgba(26, 31, 53, 0.5);
+            border-radius: 15px;
+            padding: 1.5rem;
+  
+            margin-top: 1rem;
+            border: 1px solid rgba(79, 172, 254, 0.2);
+            position: relative;
+        }
+
+        .data-display::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(45deg, 
+            background: linear-gradient(45deg,
                 transparent 0%,
-                rgba(0, 255, 0, 0.1) 50%,
+                rgba(79, 172, 254, 0.1) 50%,
                 transparent 100%);
-            animation: scan 2s linear infinite;
+            animation: pulse 2s infinite;
         }
 
-        /* 标题样式 */
-        .matrix-title {
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            text-shadow: 0 0 10px var(--primary-color);
-            margin-bottom: 1.5rem;
+        /* 进度条 */
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            margin: 1rem 0;
             position: relative;
-            display: inline-block;
+            overflow: hidden;
         }
 
-        .matrix-title::after {
+        .progress-bar::after {
             content: '';
             position: absolute;
+            top: 0;
             left: 0;
-            bottom: -5px;
-            width: 100%;
-            height: 2px;
-            background: var(--primary-color);
-            animation: glitch 1s infinite;
-        }
-
-        /* 数据块 */
-        .data-block {
-            background: rgba(0, 255, 0, 0.05);
-            border: 1px solid rgba(0, 255, 0, 0.2);
-            padding: 1.5rem;
-            margin-top: 1rem;
-            position: relative;
-        }
-
-        .data-block::before {
-            content: '[DATA]';
-            position: absolute;
-            top: -10px;
-            left: 10px;
-            background: var(--bg-dark);
-            color: var(--primary-color);
-            padding: 0 5px;
-            font-size: 0.8rem;
+            height: 100%;
+            width: 50%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            animation: progress 2s ease infinite;
         }
 
         /* 动画效果 */
-        @keyframes scan {
-            0% {
-                transform: translateY(-100%);
-            }
-            100% {
-                transform: translateY(100%);
-            }
+        @keyframes pulse {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
         }
 
-        @keyframes glitch {
-            0% {
-                transform: skewX(0deg);
-            }
-            20% {
-                transform: skewX(-10deg);
-            }
-            40% {
-                transform: skewX(10deg);
-            }
-            60% {
-                transform: skewX(-5deg);
-            }
-            80% {
-                transform: skewX(5deg);
-            }
-            100% {
-                transform: skewX(0deg);
-);
-            }
+        @keyframes progress {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(200%); }
         }
 
-        .terminal-text {
-            color: var(--primary-color);
-            line-height: 1.6;
-            font-size: 1rem;
-        }
-
-        .terminal-text::before {
-            content: '> ';
-        }
-
-        .typing {
-            border-right: 2px solid var(--primary-color);
-            animation: blink 1s step-end infinite;
-        }
-
-        @keyframes blink {
-            50% {
-                border-color: transparent;
-            }
+        /* 悬浮数据 */
+        .floating-data {
+            position: absolute;
+            font-size: 0.8rem;
+            color: var(--primary);
+            opacity: 0.8;
+            pointer-events: none;
         }
     </style>
 </head>
 <body>
-    <canvas id="matrix-rain"></canvas>
+    <div class="light-grid"></div>
 
     <div class="container">
-        <div class="tech-card">
-            <h2 class="matrix-title">系统初始化</h2>
-            <div class="data-block">
-                <p class="terminal-text typing">正在加载 AI 开发环境...</p>
-                <p class="terminal-text">系统状态: 运行中</p>
-                <p class="terminal-text">性能指标: 优化完成</p>
+        <div class="future-card">
+            <h2 class="future-title">AI System Interface</h2>
+            <div class="data-display">
+                <p>系统状态: 运行中</p>
+                <div class="progress-bar"></div>
+                <p>性能指标: 98.7%</p>
             </div>
+            <button class="future-button">初始化系统</button>
         </div>
 
-        <div class="tech-card">
-            <h2 class="matrix-title">数据分析</h2>
-            <div class="data-block">
-                <p class="terminal-text">处理速度: 500ms</p>
-                <p class="terminal-text">准确率: 99.9%</p>
-                <p class="terminal-text">运行状态: 稳定</p>
+        <div class="future-card">
+            <h2 class="future-title">数据分析中心</h2>
+            <div class="data-display">
+                <p>实时处理速度: 0.023ms</p>
+                <div class="progress-bar"></div>
+                <p>数据流量: 1.2TB/s</p>
             </div>
+            <button class="future-button">查看详情</button>
         </div>
     </div>
 
     <script>
-        // 矩阵雨效果
-        const canvas = document.getElementById('matrix-rain');
-        const ctx = canvas.getContext('2d');
-
-        // 设置canvas尺寸
-        function setCanvasSize() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        setCanvasSize();
-        window.addEventListener('resize', setCanvasSize);
-
-        // 字符集
-        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*';
-        const drops = [];
-        const fontSize = 14;
-        const columns = canvas.width/fontSize;
-
-        // 初始化drops
-        for(let x = 0; x < columns; x++) {
-            drops[x] = 1;
-        }
-
-        // 绘制矩阵雨
-        function draw() {
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            ctx.fillStyle = '#0f0';
-            ctx.font = fontSize + 'px monospace';
-
-            for(let i = 0; i < drops.length; i++) {
-                const text = chars[Math.floor(Math.random() * chars.length)];
-                ctx.fillText(text, i*fontSize, drops[i]*fontSize);
-                
-                if(drops[i]*fontSize > canvas.height && Math.random() > 0.975) {
-                    drops[i] = 0;
-                }
-                drops[i]++;
+        // 创建浮动数据效果
+        function createFloatingData() {
+            const container = document.querySelector('.container');
+            for (let i = 0; i < 20; i++) {
+                const data = document.createElement('div');
+                data.className = 'floating-data';
+                data.style.left = Math.random() * 100 + '%';
+                data.style.top = Math.random() * 100 + '%';
+                data.style.animation = `pulse ${2 + Math.random() * 2}s infinite`;
+                data.textContent = Math.random().toString(16).substr(2, 8);
+                container.appendChild(data);
             }
         }
 
-        // 动画循环
-        setInterval(draw, 33);
+        // 添加3D倾斜效果
+        document.querySelectorAll('.future-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const angleX = (y - centerY) / 30;
+                const angleY = (centerX - x) / 30;
+                
+                card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+            });
+        });
+
+        createFloatingData();
     </script>
 </body>
 </html>
