@@ -718,12 +718,12 @@
             }
         }
         
-        /* 卡通头像样式 */
-        .cartoon-avatar {
+        /* Loopy卡通头像样式 */
+        .loopy-avatar {
             width: 200px;
             height: 200px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #ffd700, #ffaa00);
+            background: linear-gradient(135deg, #ff9ec0, #ff6b9c);
             position: relative;
             margin: 0 auto 30px;
             border: 5px solid #00ffff;
@@ -731,89 +731,186 @@
             overflow: hidden;
         }
         
-        .face {
+        .loopy-face {
             width: 160px;
-            height: 180px;
-            background: #ffebcd;
+            height: 160px;
+            background: #ffe4e6;
             border-radius: 50%;
-            position: absolute;
-            top: 10px;
-            left: 20px;
-        }
-        
-        .hair {
-            width: 180px;
-            height: 100px;
-            background: #ffd700;
-            border-radius: 50% 50% 0 0;
-            position: absolute;
-            top: 0;
-            left: 10px;
-        }
-        
-        .hair-front {
-            width: 180px;
-            height: 60px;
-            background: #ffd700;
-            border-radius: 50%;
-            position: absolute;
-            top: -30px;
-            left: 10px;
-        }
-        
-        .bangs {
-            width: 160px;
-            height: 40px;
-            background: #ffd700;
-            border-radius: 50% 50% 0 0;
             position: absolute;
             top: 20px;
             left: 20px;
-            z-index: 2;
         }
         
-        .eye {
+        .loopy-ear {
+            width: 60px;
+            height: 80px;
+            background: #ff9ec0;
+            border-radius: 50%;
+            position: absolute;
+            top: -30px;
+        }
+        
+        .loopy-ear-left {
+            left: 30px;
+            transform: rotate(-15deg);
+        }
+        
+        .loopy-ear-right {
+            right: 30px;
+            transform: rotate(15deg);
+        }
+        
+        .loopy-eye {
             width: 30px;
-            height: 15px;
+            height: 40px;
             background: #333;
             border-radius: 50%;
             position: absolute;
             top: 70px;
         }
         
-        .eye-left {
+        .loopy-eye-left {
             left: 45px;
         }
         
-        .eye-right {
+        .loopy-eye-right {
             right: 45px;
         }
         
-        .mouth {
-            width: 40px;
+        .loopy-eye-sparkle {
+            width: 10px;
             height: 10px;
-            background: #ff6b6b;
-            border-radius: 0 0 20px 20px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 5px;
+            left: 5px;
+        }
+        
+        .loopy-nose {
+            width: 25px;
+            height: 15px;
+            background: #ff6b9c;
+            border-radius: 50%;
             position: absolute;
             bottom: 50px;
+            left: 87px;
+        }
+        
+        .loopy-mouth {
+            width: 40px;
+            height: 20px;
+            border-bottom: 3px solid #ff6b9c;
+            border-radius: 0 0 20px 20px;
+            position: absolute;
+            bottom: 30px;
             left: 80px;
         }
         
-        .blush {
-            width: 20px;
-            height: 10px;
+        .loopy-blush {
+            width: 25px;
+            height: 15px;
             background: rgba(255, 182, 193, 0.5);
             border-radius: 50%;
             position: absolute;
-            top: 80px;
+            top: 85px;
         }
         
-        .blush-left {
-            left: 35px;
+        .loopy-blush-left {
+            left: 30px;
         }
         
-        .blush-right {
-            right: 35px;
+        .loopy-blush-right {
+            right: 30px;
+        }
+        
+        /* Python工具页面保持原设计 */
+        #python {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+        }
+        
+        #python .story-text {
+            background: rgba(0,0,0,0.3);
+            border-left: 5px solid #ffd700;
+            box-shadow: none;
+            backdrop-filter: none;
+        }
+        
+        #python h1 {
+            color: white;
+        }
+        
+        #python h1::after {
+            background: linear-gradient(90deg, transparent, #ffd700, transparent);
+        }
+        
+        #python h2 {
+            color: #ffd700;
+        }
+        
+        #python .stat-item {
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,215,0,0.3);
+            box-shadow: none;
+        }
+        
+        #python .stat-number {
+            color: #ffd700;
+            text-shadow: 0 0 10px #ffd700;
+        }
+        
+        /* 冒险之旅子页面保持原设计 */
+        #adventure-page2,
+        #adventure-page3,
+        #adventure-page4,
+        #adventure-page5 {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+        }
+        
+        #adventure-page2 .story-text,
+        #adventure-page3 .story-text,
+        #adventure-page4 .story-text,
+        #adventure-page5 .story-text {
+            background: rgba(0,0,0,0.3);
+            border-left: 5px solid #ffd700;
+            box-shadow: none;
+            backdrop-filter: none;
+        }
+        
+        #adventure-page2 h1,
+        #adventure-page3 h1,
+        #adventure-page4 h1,
+        #adventure-page5 h1 {
+            color: white;
+        }
+        
+        #adventure-page2 h1::after,
+        #adventure-page3 h1::after,
+        #adventure-page4 h1::after,
+        #adventure-page5 h1::after {
+            background: linear-gradient(90deg, transparent, #ffd700, transparent);
+        }
+        
+        #adventure-page2 h2,
+        #adventure-page3 h2,
+        #adventure-page4 h2,
+        #adventure-page5 h2 {
+            color: #ffd700;
+        }
+        
+        #adventure-page3 .problem,
+        #adventure-page3 .solution,
+        #adventure-page4 .problem,
+        #adventure-page4 .solution,
+        #adventure-page5 .stat-item {
+            background: rgba(0,0,0,0.4);
+            box-shadow: none;
+            backdrop-filter: none;
+        }
+        
+        #adventure-page5 .stat-number {
+            color: #ffd700;
+            text-shadow: 0 0 10px #ffd700;
         }
     </style>
 </head>
@@ -855,17 +952,21 @@
             <div class="profile-container">
                 <div class="avatar-container">
                     <div class="avatar-glow"></div>
-                    <!-- 卡通头像 -->
-                    <div class="cartoon-avatar">
-                        <div class="hair"></div>
-                        <div class="hair-front"></div>
-                        <div class="bangs"></div>
-                        <div class="face">
-                            <div class="eye eye-left"></div>
-                            <div class="eye eye-right"></div>
-                            <div class="mouth"></div>
-                            <div class="blush blush-left"></div>
-                            <div class="blush blush-right"></div>
+                    <!-- Loopy卡通头像 -->
+                    <div class="loopy-avatar">
+                        <div class="loopy-ear loopy-ear-left"></div>
+                        <div class="loopy-ear loopy-ear-right"></div>
+                        <div class="loopy-face">
+                            <div class="loopy-eye loopy-eye-left">
+                                <div class="loopy-eye-sparkle"></div>
+                            </div>
+                            <div class="loopy-eye loopy-eye-right">
+                                <div class="loopy-eye-sparkle"></div>
+                            </div>
+                            <div class="loopy-nose"></div>
+                            <div class="loopy-mouth"></div>
+                            <div class="loopy-blush loopy-blush-left"></div>
+                            <div class="loopy-blush loopy-blush-right"></div>
                         </div>
                     </div>
                 </div>
