@@ -3,379 +3,330 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>个人工作台</title>
+    <title>AI冒险之旅：从想法到现实</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            font-family: 'Arial', sans-serif;
         }
         
         body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
             min-height: 100vh;
-            color: #333;
-            padding: 20px;
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding: 50px 20px;
+            text-align: center;
+        }
+        
+        .active {
+            display: block;
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
         }
         
-        /* 头部区域 */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-            margin-bottom: 30px;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        /* 英雄区域样式 */
+        .hero {
+            margin-top: 50px;
         }
         
-        .page-title {
-            font-size: 2.2rem;
-            font-weight: 600;
-            color: #2c3e50;
-            position: relative;
+        .character {
+            font-size: 8rem;
+            margin: 30px 0;
+            animation: float 3s ease-in-out infinite;
         }
         
-        .page-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 60px;
-            height: 4px;
-            background: #3498db;
-            border-radius: 2px;
+        .monster {
+            font-size: 6rem;
+            margin: 40px 0;
+            animation: shake 0.5s ease-in-out infinite;
         }
         
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
+        .treasure {
+            font-size: 8rem;
+            margin: 40px 0;
+            animation: glow 2s ease-in-out infinite;
         }
         
-        .avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: #3498db;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 1.2rem;
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
         
-        /* 主要内容区域 */
-        .main-content {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 30px;
+        h2 {
+            font-size: 2rem;
+            margin: 30px 0;
+            color: #ffd700;
         }
         
-        /* 侧边导航 */
-        .sidebar {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        .story-text {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            margin: 30px auto;
+            max-width: 800px;
+            background: rgba(0,0,0,0.3);
             padding: 25px;
-            height: fit-content;
+            border-radius: 15px;
+            border-left: 5px solid #ffd700;
         }
         
-        .nav-section {
-            margin-bottom: 30px;
-        }
-        
-        .section-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #2c3e50;
-            margin-bottom: 15px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .nav-item {
-            display: flex;
-            align-items: center;
-            padding: 12px 15px;
-            margin-bottom: 8px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            color: #555;
-        }
-        
-        .nav-item:hover {
-            background: #f8f9fa;
-            color: #3498db;
-        }
-        
-        .nav-item.active {
-            background: #e3f2fd;
-            color: #3498db;
-            font-weight: 500;
-        }
-        
-        .nav-number {
-            display: inline-block;
-            width: 24px;
-            height: 24px;
-            background: #3498db;
-            color: white;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 24px;
-            margin-right: 12px;
-            font-size: 0.85rem;
-        }
-        
-        /* 工具栏区域 */
-        .tool-section {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            padding: 25px;
-            margin-bottom: 30px;
-        }
-        
-        .tool-item {
-            display: flex;
-            align-items: center;
-            padding: 15px;
-            margin-bottom: 12px;
-            border-radius: 8px;
-            background: #f8f9fa;
-            transition: all 0.3s ease;
-        }
-        
-        .tool-item:hover {
-            background: #e3f2fd;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-        }
-        
-        .checkbox {
-            width: 20px;
-            height: 20px;
-            border: 2px solid #ddd;
-            border-radius: 4px;
-            margin-right: 15px;
-            position: relative;
-            cursor: pointer;
-        }
-        
-        .checkbox.checked::after {
-            content: '✓';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: #3498db;
-            font-weight: bold;
-        }
-        
-        .tool-text {
-            flex: 1;
-            font-size: 1rem;
-            color: #444;
-        }
-        
-        /* 按钮区域 */
-        .button-section {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            padding: 25px;
-        }
-        
-        .button-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 15px;
-        }
-        
-        .action-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 14px 20px;
-            background: #3498db;
+        .btn {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
             color: white;
             border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 500;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border-radius: 50px;
             cursor: pointer;
+            margin: 20px 10px;
             transition: all 0.3s ease;
-            box-shadow: 0 2px 5px rgba(52, 152, 219, 0.3);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
         
-        .action-btn:hover {
-            background: #2980b9;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(52, 152, 219, 0.4);
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
         }
         
-        .action-btn.secondary {
-            background: #ecf0f1;
-            color: #34495e;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        .btn-next {
+            background: linear-gradient(45deg, #00b894, #00a085);
         }
         
-        .action-btn.secondary:hover {
-            background: #d5dbdb;
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+            flex-wrap: wrap;
         }
         
-        /* 响应式设计 */
-        @media (max-width: 900px) {
-            .main-content {
-                grid-template-columns: 1fr;
+        .stat-item {
+            background: rgba(255,255,255,0.1);
+            padding: 25px;
+            border-radius: 15px;
+            min-width: 200px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,215,0,0.3);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ffd700;
+            display: block;
+        }
+        
+        /* 动画效果 */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
+        @keyframes glow {
+            0%, 100% { 
+                transform: scale(1);
+                text-shadow: 0 0 20px #ffd700;
             }
-            
-            .button-grid {
-                grid-template-columns: 1fr;
+            50% { 
+                transform: scale(1.1);
+                text-shadow: 0 0 30px #ffd700, 0 0 40px #ffd700;
             }
         }
         
-        @media (max-width: 600px) {
-            .header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 15px;
-            }
-            
-            .page-title {
-                font-size: 1.8rem;
-            }
+        .battle-info {
+            display: flex;
+            gap: 30px;
+            margin: 40px 0;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .problem, .solution {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(0,0,0,0.4);
+            padding: 25px;
+            border-radius: 15px;
+            border: 2px solid;
+        }
+        
+        .problem {
+            border-color: #ff6b6b;
+        }
+        
+        .solution {
+            border-color: #00b894;
+        }
+        
+        .nav-buttons {
+            margin-top: 40px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- 头部区域 -->
-        <div class="header">
-            <h1 class="page-title">关于我</h1>
-            <div class="user-info">
-                <div class="avatar">CS</div>
-                <div>
-                    <div style="font-weight: 600;">Cara Song</div>
-                    <div style="font-size: 0.9rem; color: #777;">AI工具开发者</div>
-                </div>
+    <!-- 页面1: 冒险者开场 -->
+    <div id="page1" class="page active">
+        <div class="container">
+            <div class="hero">
+                <div class="character">⚔️</div>
+                <h1>AI冒险之旅</h1>
+                <p class="story-text">勇敢的开发者啊，你即将踏上一次非凡的旅程！<br>在这个数字世界中，你将面对挑战、学习魔法（代码），最终获得改变世界的宝藏。</p>
+                <button class="btn" onclick="showPage(2)">开始冒险 🚀</button>
             </div>
         </div>
-        
-        <!-- 主要内容区域 -->
-        <div class="main-content">
-            <!-- 侧边导航 -->
-            <div class="sidebar">
-                <div class="nav-section">
-                    <h3 class="section-title">导航菜单</h3>
-                    <div class="nav-item active">
-                        <span class="nav-number">01</span>
-                        <span>首页</span>
-                    </div>
-                    <div class="nav-item">
-                        <span class="nav-number">02</span>
-                        <span>我的文档</span>
-                    </div>
-                    <div class="nav-item">
-                        <span class="nav-number">03</span>
-                        <span>我的文档内容</span>
-                    </div>
+    </div>
+
+    <!-- 页面2: 背景故事 -->
+    <div id="page2" class="page">
+        <div class="container">
+            <h1>召唤的起源</h1>
+            <p class="story-text">
+                "在遥远的数字王国中，我们的魔法师团队每天都要进行4小时的仪式性数据搬运...<br>
+                错误率高达40%！宝贵的创造力被浪费在重复劳动中。<br><br>
+                
+                直到有一天，我们听到了远古的召唤：<br>
+                <strong>'让机器处理重复，让人专注创造'</strong><br><br>
+                
+                于是，你被选中踏上这场AI工具的创造之旅！"
+            </p>
+            <button class="btn btn-next" onclick="showPage(3)">继续前进 →</button>
+        </div>
+    </div>
+
+    <!-- 页面3: 第一个怪兽 - 元素定位难题 -->
+    <div id="page3" class="page">
+        <div class="container">
+            <h1>第一场战斗：迷雾森林的定位怪兽</h1>
+            <div class="monster">👾</div>
+            <h2>元素定位难题</h2>
+            
+            <div class="battle-info">
+                <div class="problem">
+                    <h3>🐉 怪兽的能力</h3>
+                    <p>动态加载的网页元素</p>
+                    <p>复杂多变的页面结构</p>
+                    <p>缺乏唯一标识符</p>
+                    <p><strong>初期成功率：仅30%</strong></p>
                 </div>
                 
-                <div class="nav-section">
-                    <h3 class="section-title">快捷操作</h3>
-                    <div class="nav-item">
-                        <span class="nav-number">04</span>
-                        <span>新建文档</span>
-                    </div>
-                    <div class="nav-item">
-                        <span class="nav-number">05</span>
-                        <span>模板库</span>
-                    </div>
-                    <div class="nav-item">
-                        <span class="nav-number">06</span>
-                        <span>设置</span>
-                    </div>
+                <div class="solution">
+                    <h3>⚔️ 你的魔法武器</h3>
+                    <p>XPath精准定位术</p>
+                    <p>父级元素辅助定位</p>
+                    <p>智能选择器策略</p>
+                    <p><strong>最终成功率：98%</strong></p>
                 </div>
             </div>
             
-            <!-- 右侧内容 -->
-            <div>
-                <!-- 工具栏区域 -->
-                <div class="tool-section">
-                    <h3 class="section-title">工具栏</h3>
-                    <div class="tool-item">
-                        <div class="checkbox checked"></div>
-                        <div class="tool-text">输入"Hello CS! Hello 我是！"</div>
-                    </div>
-                    <div class="tool-item">
-                        <div class="checkbox"></div>
-                        <div class="tool-text">输入"Hello CS! Hello 我是！"</div>
-                    </div>
-                    <div class="tool-item">
-                        <div class="checkbox"></div>
-                        <div class="tool-text">输入"Hello CS! Hello 我是！"</div>
-                    </div>
+            <button class="btn btn-next" onclick="showPage(4)">击败怪兽，继续前进！</button>
+        </div>
+    </div>
+
+    <!-- 页面4: 第二个怪兽 - 后台运行瓶颈 -->
+    <div id="page4" class="page">
+        <div class="container">
+            <h1>第二场战斗：资源沼泽的吞噬者</h1>
+            <div class="monster">🤖</div>
+            <h2>后台运行瓶颈</h2>
+            
+            <div class="battle-info">
+                <div class="problem">
+                    <h3>🐲 怪兽的能力</h3>
+                    <p>大量占用CPU资源</p>
+                    <p>内存泄漏问题</p>
+                    <p>无法稳定后台运行</p>
+                    <p><strong>用户体验极差</strong></p>
                 </div>
                 
-                <!-- 按钮区域 -->
-                <div class="button-section">
-                    <h3 class="section-title">操作按钮</h3>
-                    <div class="button-grid">
-                        <button class="action-btn">保存文档</button>
-                        <button class="action-btn">导出PDF</button>
-                        <button class="action-btn">分享链接</button>
-                        <button class="action-btn secondary">预览</button>
-                        <button class="action-btn secondary">重置</button>
-                        <button class="action-btn secondary">更多操作</button>
-                    </div>
+                <div class="solution">
+                    <h3>🛡️ 你的防御神器</h3>
+                    <p>浏览器无头模式</p>
+                    <p>无痕环境运行</p>
+                    <p>资源优化策略</p>
+                    <p><strong>CPU占用降低40%</strong></p>
                 </div>
+            </div>
+            
+            <button class="btn btn-next" onclick="showPage(5)">战胜最终BOSS！</button>
+        </div>
+    </div>
+
+    <!-- 页面5: 获得宝藏 -->
+    <div id="page5" class="page">
+        <div class="container">
+            <h1>🎉 宝藏洞窟 🎉</h1>
+            <div class="treasure">🏆</div>
+            <p class="story-text">恭喜！你成功击败了所有怪兽，获得了改变世界的宝藏！</p>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-number">50+</span>
+                    <p>用户覆盖</p>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">96%</span>
+                    <p>准确率</p>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">500+</span>
+                    <p>每月节省小时</p>
+                </div>
+            </div>
+            
+            <div class="story-text">
+                <p>✨ <strong>任务时间：4小时 → 8分钟</strong>（效率提升30倍！）</p>
+                <p>💫 <strong>每月为团队节省500+创造小时</strong></p>
+                <p>🌟 <strong>将时间真正还给创造者</strong></p>
+            </div>
+            
+            <div class="nav-buttons">
+                <button class="btn" onclick="showPage(1)">重新开始冒险</button>
             </div>
         </div>
     </div>
 
     <script>
-        // 添加交互功能
-        document.addEventListener('DOMContentLoaded', function() {
-            // 复选框点击事件
-            const checkboxes = document.querySelectorAll('.checkbox');
-            checkboxes.forEach(checkbox => {
-                checkbox.addEventListener('click', function() {
-                    this.classList.toggle('checked');
-                });
+        function showPage(pageNumber) {
+            // 隐藏所有页面
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
             });
             
-            // 导航项点击事件
-            const navItems = document.querySelectorAll('.nav-item');
-            navItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    navItems.forEach(i => i.classList.remove('active'));
-                    this.classList.add('active');
-                });
-            });
+            // 显示目标页面
+            document.getElementById('page' + pageNumber).classList.add('active');
             
-            // 按钮点击事件
-            const buttons = document.querySelectorAll('.action-btn');
-            buttons.forEach(button => {
-                button.addEventListener('click', function() {
-                    // 添加点击反馈
-                    this.style.transform = 'scale(0.98)';
-                    setTimeout(() => {
-                        this.style.transform = '';
-                    }, 150);
-                    
-                    // 在实际应用中，这里会执行相应的功能
-                    console.log(`点击了: ${this.textContent}`);
-                });
-            });
+            // 滚动到顶部
+            window.scrollTo(0, 0);
+        }
+        
+        // 可选：添加键盘导航
+        document.addEventListener('keydown', function(event) {
+            const activePage = document.querySelector('.page.active');
+            const currentPage = parseInt(activePage.id.replace('page', ''));
+            
+            if (event.key === 'ArrowRight' && currentPage < 5) {
+                showPage(currentPage + 1);
+            } else if (event.key === 'ArrowLeft' && currentPage > 1) {
+                showPage(currentPage - 1);
+            }
         });
     </script>
 </body>
