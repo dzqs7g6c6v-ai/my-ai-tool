@@ -3,126 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Futuristic Style Preview</title>
+    <title>Cyberpunk Style Preview</title>
     <style>
         :root {
-            --primary: #4facfe;
-            --secondary: #00f2fe;
-            --accent: #7d5fff;
-            --dark: #1a1f35;
-            --light: #ffffff;
+            --neon-pink: #ff2d55;
+            --neon-blue: #0ff;
+            --neon-yellow: #f0f;
+            --dark: #090415;
+            --glitch-speed: 0.5s;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Orbitron', sans-serif;
         }
 
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap');
+
         body {
-            background: linear-gradient(135deg, var(--dark), #2a2f45);
-            color: var(--light);
-            min-height: 100vh;
+            background: var(--dark);
+            color: #fff;
             overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* 故障背景效果 */
+        .glitch-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.15) 0px,
+                rgba(0, 0, 0, 0.15) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            z-index: 1;
+            animation: scan 8s linear infinite;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
+            position: relative;
+            z-index: 2;
         }
 
-        /* 发光线条背景 */
-        .light-grid {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(to right, rgba(79, 172, 254, 0.1) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(79, 172, 254, 0.1) 1px, transparent 1px);
-            background-size: 50px 50px;
-            z-index: 0;
-        }
-
-        /* 未来主义卡片 */
-        .future-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
+        /* 赛博朋克卡片 */
+        .cyber-card {
+            background: rgba(9, 4, 21, 0.8);
+            border: 2px solid var(--neon-pink);
+            border-radius: 5px;
             padding: 2rem;
             margin: 2rem 0;
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transform: perspective(1000px) rotateX(5deg);
-            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(255, 45, 85, 0.3);
         }
 
-        .future-card::before {
+        .cyber-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
             background: linear-gradient(
-                90deg,
+                45deg,
                 transparent,
-                rgba(255, 255, 255, 0.2),
+                rgba(255, 45, 85, 0.1),
                 transparent
             );
-            transition: 0.5s;
+            transform: rotate(45deg);
+            animation: glitch-sweep 3s linear infinite;
         }
 
-        .future-card:hover::before {
-            left: 100%;
-        }
-
-        .future-card:hover {
-            transform: perspective(1000px) rotateX(0deg);
-            box-shadow: 0 0 30px rgba(79, 172, 254, 0.3);
-        }
-
-        /* 标题样式 */
-        .future-title {
+        /* 霓虹标题 */
+        .cyber-title {
             font-size: 2.5rem;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--neon-pink);
+            text-shadow: 
+                0 0 5px var(--neon-pink),
+                0 0 10px var(--neon-pink),
+                0 0 20px var(--neon-pink);
             margin-bottom: 1.5rem;
             position: relative;
             display: inline-block;
         }
 
-        .future-title::after {
-            content: '';
+        .cyber-title::before {
+            content: attr(data-text);
             position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, var(--primary), transparent);
+            left: -2px;
+            text-shadow: 2px 0 var(--neon-blue);
+            animation: glitch-text var(--glitch-speed) infinite;
+            clip: rect(44px, 450px, 56px, 0);
         }
 
-        /* 未来主义按钮 */
-        .future-button {
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            border: none;
-            border-radius: 25px;
-            padding: 12px 30px;
-            color: var(--light);
-            font-size: 1rem;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
+        .cyber-title::after {
+            content: attr(data-text);
+            position: absolute;
+            left: 2px;
+            text-shadow: -2px 0 var(--neon-yellow);
+            animation: glitch-text var(--glitch-speed) infinite;
+            clip: rect(44px, 450px, 56px, 0);
+            animation-delay: calc(var(--glitch-speed) / 2);
+        }
+
+        /* 数据显示区域 */
+        .cyber-data {
+            background: rgba(255, 45, 85, 0.1);
+            border-left: 4px solid var(--neon-pink);
+            padding: 1rem;
             margin: 1rem 0;
+            font-family: 'Courier New', monospace;
         }
 
-        .future-button::before {
+        .cyber-data p {
+ {
+            color: var(--neon-blue);
+            margin: 0.5rem 0;
+            text-shadow: 0 0 5px var(--neon-blue);
+        }
+
+        /* 赛博按钮 */
+        .cyber-button {
+            background: transparent;
+            border: 2px solid var(--neon-pink);
+            color: var(--neon-pink);
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+
+        .cyber-button:hover {
+            background: var(--neon-pink);
+            color: var(--dark);
+            box-shadow: 0 0 20px var(--neon-pink);
+        }
+
+        .cyber-button::before {
             content: '';
             position: absolute;
             top: 0;
@@ -132,147 +165,135 @@
             background: linear-gradient(
                 90deg,
                 transparent,
-                   rgba(255, 255, 255, 0.4),
+                rgba(255, 255, 255, 0.4),
                 transparent
             );
             transition: 0.5s;
         }
 
-        .future-button:hover::before {
+        .cyber-button:hover::before {
             left: 100%;
         }
 
-        /* 数据显示区域 */
-        .data-display {
-            background: rgba(26, 31, 53, 0.5);
-            border-radius: 15px;
-            padding: 1.5rem;
-  
-            margin-top: 1rem;
-            border: 1px solid rgba(79, 172, 254, 0.2);
-            position: relative;
-        }
-
-        .data-display::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg,
-                transparent 0%,
-                rgba(79, 172, 254, 0.1) 50%,
-                transparent 100%);
-            animation: pulse 2s infinite;
-        }
-
-        /* 进度条 */
-        .progress-bar {
-            width: 100%;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 2px;
-            margin: 1rem 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .progress-bar::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 50%;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            animation: progress 2s ease infinite;
-        }
-
         /* 动画效果 */
-        @keyframes pulse {
-            0% { opacity: 0.5; }
-            50% { opacity: 1; }
-            100% { opacity: 0.5; }
+        @keyframes scan {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(100vh); }
         }
 
-        @keyframes progress {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(200%); }
+        @keyframes glitch-text {
+            0% { clip: rect(44px, 450px, 56px, 0); }
+            5% { clip: rect(35px, 450px, 35px, 0); }
+            10% { clip: rect(85px, 450px, 13px, 0); }
+            15% { clip: rect(80px, 450px, 29px, 0); }
+            20% { clip: rect(32px, 450px, 11px, 0); }
+            25% { clip: rect(94px, 450px, 46px, 0); }
         }
 
-        /* 悬浮数据 */
-        .floating-data {
+        @keyframes glitch-sweep {
+            0% { transform: translate(-50%, -50%) rotate(45deg); }
+            100% { transform: translate(50%, 50%) rotate(45deg); }
+        }
+
+        /* 装饰元素 */
+        .corner-decoration {
             position: absolute;
-            font-size: 0.8rem;
-            color: var(--primary);
-            opacity: 0.8;
-            pointer-events: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--neon-pink);
+        }
+
+        .corner-decoration.top-left {
+            top: 0;
+            left: 0;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .corner-decoration.top-right {
+            top: 0;
+            right: 0;
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .corner-decoration.bottom-left {
+            bottom: 0;
+            left: 0;
+            border-right: none;
+            border-top: none;
+        }
+
+        .corner-decoration.bottom-right {
+            bottom: 0;
+            right: 0;
+            border-left: none;
+            border-top: none;
         }
     </style>
 </head>
 <body>
-    <div class="light-grid"></div>
+    <div class="glitch-bg"></div>
 
     <div class="container">
-        <div class="future-card">
-            <h2 class="future-title">AI System Interface</h2>
-            <div class="data-display">
-                <p>系统状态: 运行中</p>
-                <div class="progress-bar"></div>
-                <p>性能指标: 98.7%</p>
+        <div class="cyber-card">
+            <div class="corner-decoration top-left"></div>
+            <div class="corner-decoration top-right"></div>
+            <div class="corner-decoration bottom-left"></div>
+            <div class="corner-decoration bottom-right"></div>
+
+            <h2 class="cyber-title" data-text="SYSTEM://INIT">SYSTEM://INIT</h2>
+            <div class="cyber-data">
+                <p>> 初始化系统核心...</p>
+                <p>> 加载神经网络模型...</p>
+                <p>> 建立量子通信链接...</p>
             </div>
-            <button class="future-button">初始化系统</button>
+            <button class="cyber-button">Access_Mainframe</button>
         </div>
 
-        <div class="future-card">
-            <h2 class="future-title">数据分析中心</h2>
-            <div class="data-display">
-                <p>实时处理速度: 0.023ms</p>
-                <div class="progress-bar"></div>
-                <p>数据流量: 1.2TB/s</p>
+        <div class="cyber-card">
+            <div class="corner-decoration top-left"></div>
+            <div class="corner-decoration top-right"></div>
+            <div class="corner-decoration bottom-left"></div>
+            <div class="corner-decoration bottom-right"></div>
+
+            <h2 class="cyber-title" data-text="DATA://STREAM">DATA://STREAM</h2>
+            <div class="cyber-data">
+                <p>> 数据流速率: 1.21 TB/s</p>
+                <p>> 神经元响应: 0.003ms</p>
+                <p>> 量子态稳定性: 99.9%</p>
             </div>
-            <button class="future-button">查看详情</button>
+            <button class="cyber-button">Enter_Matrix</button>
         </div>
     </div>
 
     <script>
-        // 创建浮动数据效果
-        function createFloatingData() {
-            const container = document.querySelector('.container');
-            for (let i = 0; i < 20; i++) {
-                const data = document.createElement('div');
-                data.className = 'floating-data';
-                data.style.left = Math.random() * 100 + '%';
-                data.style.top = Math.random() * 100 + '%';
-                data.style.animation = `pulse ${2 + Math.random() * 2}s infinite`;
-                data.textContent = Math.random().toString(16).substr(2, 8);
-                container.appendChild(data);
-            }
+        // 添加故障效果
+        function createGlitchEffect() {
+            document.querySelectorAll('.cyber-title').forEach(title => {
+                setInterval(() => {
+                    title.style.textShadow = `
+                        ${Math.random() * 10}px ${Math.random() * 10}px ${Math.random() * 30}px var(--neon-pink),
+                        ${Math.random() * -10}px ${Math.random() * 10}px ${Math.random() * 30}px var(--neon-blue)
+                    `;
+                }, 50);
+            });
         }
 
-        // 添加3D倾斜效果
-        document.querySelectorAll('.future-card').forEach(card => {
-            card.addEventListener('mousemove', (e) => {
+        // 鼠标移动效果
+        document.addEventListener('mousemove', (e) => {
+            const cards = document.querySelectorAll('.cyber-card');
+            cards.forEach(card => {
                 const rect = card.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
-                
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                
-                const angleX = (y - centerY) / 30;
-                const angleY = (centerX - x) / 30;
-                
-                card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg)`;
-            });
-            
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
             });
         });
 
-        createFloatingData();
+        createGlitchEffect();
     </script>
 </body>
 </html>
