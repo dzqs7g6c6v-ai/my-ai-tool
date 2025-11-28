@@ -566,31 +566,52 @@
             right: 45px;
         }
         
-        /* Python工具页面样式 */
+        /* Python工具页面样式 - 修复版 */
         .python-container {
             text-align: center;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
         
         .hero {
-            margin-top: 50px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
         
         .character {
             font-size: 8rem;
             margin: 30px 0;
             animation: float 3s ease-in-out infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
         }
         
         .monster {
             font-size: 6rem;
             margin: 40px 0;
             animation: shake 0.5s ease-in-out infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
         }
         
         .treasure {
             font-size: 8rem;
             margin: 40px 0;
             animation: glow 2s ease-in-out infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
         }
         
         h1 {
@@ -599,6 +620,8 @@
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
             color: #00ffff;
             position: relative;
+            text-align: center;
+            width: 100%;
         }
         
         h1::after {
@@ -616,6 +639,8 @@
             font-size: 2rem;
             margin: 30px 0;
             color: #00ffff;
+            text-align: center;
+            width: 100%;
         }
         
         .story-text {
@@ -629,6 +654,7 @@
             border-left: 5px solid #00ffff;
             box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
             backdrop-filter: blur(5px);
+            text-align: center;
         }
         
         .btn {
@@ -676,6 +702,7 @@
             gap: 30px;
             margin: 40px 0;
             flex-wrap: wrap;
+            width: 100%;
         }
         
         .stat-item {
@@ -687,6 +714,7 @@
             border: 2px solid rgba(0, 255, 255, 0.3);
             box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
             transition: transform 0.3s ease;
+            text-align: center;
         }
         
         .stat-item:hover {
@@ -731,6 +759,7 @@
             align-items: center;
             justify-content: center;
             flex-wrap: wrap;
+            width: 100%;
         }
         
         .problem, .solution {
@@ -742,6 +771,7 @@
             border: 2px solid;
             box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
             backdrop-filter: blur(5px);
+            text-align: center;
         }
         
         .problem {
@@ -754,6 +784,98 @@
         
         .nav-buttons {
             margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        /* Python工具页面保持原设计 */
+        #python {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+        }
+        
+        #python .story-text {
+            background: rgba(0,0,0,0.3);
+            border-left: 5px solid #ffd700;
+            box-shadow: none;
+            backdrop-filter: none;
+        }
+        
+        #python h1 {
+            color: white;
+        }
+        
+        #python h1::after {
+            background: linear-gradient(90deg, transparent, #ffd700, transparent);
+        }
+        
+        #python h2 {
+            color: #ffd700;
+        }
+        
+        #python .stat-item {
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,215,0,0.3);
+            box-shadow: none;
+        }
+        
+        #python .stat-number {
+            color: #ffd700;
+            text-shadow: 0 0 10px #ffd700;
+        }
+        
+        /* 冒险之旅子页面保持原设计 */
+        #adventure-page2,
+        #adventure-page3,
+        #adventure-page4,
+        #adventure-page5 {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+        }
+        
+        #adventure-page2 .story-text,
+        #adventure-page3 .story-text,
+        #adventure-page4 .story-text,
+        #adventure-page5 .story-text {
+            background: rgba(0,0,0,0.3);
+            border-left: 5px solid #ffd700;
+            box-shadow: none;
+            backdrop-filter: none;
+        }
+        
+        #adventure-page2 h1,
+        #adventure-page3 h1,
+        #adventure-page4 h1,
+        #adventure-page5 h1 {
+            color: white;
+        }
+        
+        #adventure-page2 h1::after,
+        #adventure-page3 h1::after,
+        #adventure-page4 h1::after,
+        #adventure-page5 h1::after {
+            background: linear-gradient(90deg, transparent, #ffd700, transparent);
+        }
+        
+        #adventure-page2 h2,
+        #adventure-page3 h2,
+        #adventure-page4 h2,
+        #adventure-page5 h2 {
+            color: #ffd700;
+        }
+        
+        #adventure-page3 .problem,
+        #adventure-page3 .solution,
+        #adventure-page4 .problem,
+        #adventure-page4 .solution,
+        #adventure-page5 .stat-item {
+            background: rgba(0,0,0,0.4);
+            box-shadow: none;
+            backdrop-filter: none;
+        }
+        
+        #adventure-page5 .stat-number {
+            color: #ffd700;
+            text-shadow: 0 0 10px #ffd700;
         }
         
         /* 成果展示页面样式 */
@@ -890,95 +1012,6 @@
             left: 0;
             color: #00ffff;
             text-shadow: 0 0 5px #00ffff;
-        }
-        
-        /* Python工具页面保持原设计 */
-        #python {
-            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
-        }
-        
-        #python .story-text {
-            background: rgba(0,0,0,0.3);
-            border-left: 5px solid #ffd700;
-            box-shadow: none;
-            backdrop-filter: none;
-        }
-        
-        #python h1 {
-            color: white;
-        }
-        
-        #python h1::after {
-            background: linear-gradient(90deg, transparent, #ffd700, transparent);
-        }
-        
-        #python h2 {
-            color: #ffd700;
-        }
-        
-        #python .stat-item {
-            background: rgba(255,255,255,0.1);
-            border: 2px solid rgba(255,215,0,0.3);
-            box-shadow: none;
-        }
-        
-        #python .stat-number {
-            color: #ffd700;
-            text-shadow: 0 0 10px #ffd700;
-        }
-        
-        /* 冒险之旅子页面保持原设计 */
-        #adventure-page2,
-        #adventure-page3,
-        #adventure-page4,
-        #adventure-page5 {
-            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
-        }
-        
-        #adventure-page2 .story-text,
-        #adventure-page3 .story-text,
-        #adventure-page4 .story-text,
-        #adventure-page5 .story-text {
-            background: rgba(0,0,0,0.3);
-            border-left: 5px solid #ffd700;
-            box-shadow: none;
-            backdrop-filter: none;
-        }
-        
-        #adventure-page2 h1,
-        #adventure-page3 h1,
-        #adventure-page4 h1,
-        #adventure-page5 h1 {
-            color: white;
-        }
-        
-        #adventure-page2 h1::after,
-        #adventure-page3 h1::after,
-        #adventure-page4 h1::after,
-        #adventure-page5 h1::after {
-            background: linear-gradient(90deg, transparent, #ffd700, transparent);
-        }
-        
-        #adventure-page2 h2,
-        #adventure-page3 h2,
-        #adventure-page4 h2,
-        #adventure-page5 h2 {
-            color: #ffd700;
-        }
-        
-        #adventure-page3 .problem,
-        #adventure-page3 .solution,
-        #adventure-page4 .problem,
-        #adventure-page4 .solution,
-        #adventure-page5 .stat-item {
-            background: rgba(0,0,0,0.4);
-            box-shadow: none;
-            backdrop-filter: none;
-        }
-        
-        #adventure-page5 .stat-number {
-            color: #ffd700;
-            text-shadow: 0 0 10px #ffd700;
         }
         
         /* 响应式设计 */
