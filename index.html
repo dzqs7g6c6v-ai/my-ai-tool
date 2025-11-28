@@ -9,7 +9,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', 'Arial', sans-serif;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
         }
         
         body {
@@ -179,7 +179,7 @@
         }
         
         .nav-container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
@@ -235,7 +235,6 @@
             display: none;
             min-height: 100vh;
             padding: 100px 20px 50px;
-            text-align: center;
         }
         
         .active {
@@ -243,11 +242,359 @@
         }
         
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
         }
         
-        /* 英雄区域样式 */
+        /* 关于我页面重新设计 */
+        .about-container {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+        }
+        
+        .profile-section {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            padding: 40px;
+            background: rgba(10, 10, 30, 0.7);
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+        }
+        
+        .avatar-section {
+            flex-shrink: 0;
+            text-align: center;
+        }
+        
+        .avatar-container {
+            position: relative;
+            width: 220px;
+            height: 220px;
+            margin-bottom: 20px;
+        }
+        
+        .avatar-glow {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            right: -15px;
+            bottom: -15px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0,255,255,0.4) 0%, rgba(0,255,255,0) 70%);
+            z-index: -1;
+            animation: pulse 3s infinite;
+        }
+        
+        .profile-info {
+            flex: 1;
+        }
+        
+        .profile-title {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff;
+        }
+        
+        .profile-subtitle {
+            font-size: 1.3rem;
+            color: #a0a0ff;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        
+        .profile-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+        
+        .tag {
+            background: rgba(0, 255, 255, 0.1);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+        }
+        
+        .profile-stats {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .stat-box {
+            text-align: center;
+            padding: 15px;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #00ffff;
+            display: block;
+            text-shadow: 0 0 10px #00ffff;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #a0a0ff;
+            margin-top: 5px;
+        }
+        
+        /* 工具背景和时间线部分 */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        
+        .background-card, .timeline-card {
+            background: rgba(10, 10, 30, 0.7);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+        }
+        
+        .card-title {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: #00ffff;
+            text-shadow: 0 0 8px #00ffff;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .card-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: #00ffff;
+            border-radius: 2px;
+        }
+        
+        .background-description {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 30px;
+            color: #e0e0ff;
+        }
+        
+        .background-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .background-stat {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .background-stat:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 255, 255, 0.2);
+        }
+        
+        .stat-percentage {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #00ffff;
+            min-width: 80px;
+            text-shadow: 0 0 10px #00ffff;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            text-align: left;
+            color: #e0e0ff;
+        }
+        
+        .timeline {
+            position: relative;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: #00ffff;
+            box-shadow: 0 0 10px #00ffff;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 35px;
+            padding-left: 80px;
+        }
+        
+        .timeline-marker {
+            position: absolute;
+            left: 20px;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            background: #00ffff;
+            border-radius: 50%;
+            box-shadow: 0 0 15px #00ffff;
+            z-index: 2;
+        }
+        
+        .timeline-date {
+            font-weight: bold;
+            color: #00ffff;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 3px solid #00ffff;
+            transition: all 0.3s ease;
+        }
+        
+        .timeline-content:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+        
+        /* Loopy卡通头像样式 - 调整版 */
+        .loopy-avatar {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff9ec0, #ff6b9c);
+            position: relative;
+            border: 5px solid #00ffff;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+            overflow: hidden;
+        }
+        
+        .loopy-face {
+            width: 160px;
+            height: 160px;
+            background: #ffe4e6;
+            border-radius: 50%;
+            position: absolute;
+            top: 30px;
+            left: 30px;
+        }
+        
+        .loopy-ear {
+            width: 70px;
+            height: 90px;
+            background: #ff9ec0;
+            border-radius: 50%;
+            position: absolute;
+            top: -25px;
+            z-index: 1;
+        }
+        
+        .loopy-ear-left {
+            left: 20px;
+            transform: rotate(-15deg);
+        }
+        
+        .loopy-ear-right {
+            right: 20px;
+            transform: rotate(15deg);
+        }
+        
+        .loopy-eye {
+            width: 28px;
+            height: 38px;
+            background: #333;
+            border-radius: 50%;
+            position: absolute;
+            top: 65px;
+        }
+        
+        .loopy-eye-left {
+            left: 50px;
+        }
+        
+        .loopy-eye-right {
+            right: 50px;
+        }
+        
+        .loopy-eye-sparkle {
+            width: 9px;
+            height: 9px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 10px;
+            left: 6px;
+        }
+        
+        .loopy-nose {
+            width: 22px;
+            height: 14px;
+            background: #ff6b9c;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 55px;
+            left: 99px;
+        }
+        
+        .loopy-mouth {
+            width: 38px;
+            height: 18px;
+            border-bottom: 3px solid #ff6b9c;
+            border-radius: 0 0 20px 20px;
+            position: absolute;
+            bottom: 40px;
+            left: 91px;
+        }
+        
+        .loopy-blush {
+            width: 22px;
+            height: 14px;
+            background: rgba(255, 182, 193, 0.5);
+            border-radius: 50%;
+            position: absolute;
+            top: 80px;
+        }
+        
+        .loopy-blush-left {
+            left: 35px;
+        }
+        
+        .loopy-blush-right {
+            right: 35px;
+        }
+        
+        /* Python工具页面样式 */
+        .python-container {
+            text-align: center;
+        }
+        
         .hero {
             margin-top: 50px;
         }
@@ -433,188 +780,11 @@
             margin-top: 40px;
         }
         
-        /* 新增样式 - 关于我页面 */
-        .profile-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .avatar-container {
-            position: relative;
-            width: 200px;
-            height: 200px;
-            margin-bottom: 30px;
-        }
-        
-        .avatar-glow {
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(0,255,255,0.4) 0%, rgba(0,255,255,0) 70%);
-            z-index: -1;
-            animation: pulse 3s infinite;
-        }
-        
-        .profile-intro {
-            font-size: 1.5rem;
-            margin-bottom: 40px;
-            line-height: 1.6;
-        }
-        
-        .profile-intro p {
-            margin: 10px 0;
-        }
-        
-        /* 工具背景板块 */
-        .tool-background {
-            display: flex;
-            gap: 40px;
-            margin: 50px 0;
-            align-items: flex-start;
-            flex-wrap: wrap;
-        }
-        
-        .background-content {
-            flex: 1;
-            min-width: 300px;
-            background: rgba(10, 10, 30, 0.7);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
-            backdrop-filter: blur(5px);
-            border: 2px solid rgba(0, 255, 255, 0.3);
-        }
-        
-        .background-title {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            color: #00ffff;
+        /* 成果展示页面样式 */
+        .results-container {
             text-align: center;
         }
         
-        .background-description {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 30px;
-            text-align: left;
-        }
-        
-        .background-stats {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-        
-        .background-stat {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            transition: all 0.3s ease;
-        }
-        
-        .background-stat:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateX(5px);
-        }
-        
-        .stat-percentage {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #00ffff;
-            min-width: 80px;
-            text-shadow: 0 0 10px #00ffff;
-        }
-        
-        .stat-label {
-            font-size: 1.1rem;
-            text-align: left;
-        }
-        
-        .timeline-section {
-            flex: 1;
-            min-width: 300px;
-        }
-        
-        .timeline {
-            width: 100%;
-            max-width: 700px;
-            margin: 0 auto;
-            position: relative;
-        }
-        
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: #00ffff;
-            transform: translateX(-50%);
-            box-shadow: 0 0 10px #00ffff;
-        }
-        
-        .timeline-item {
-            position: relative;
-            margin-bottom: 50px;
-            width: 50%;
-            padding: 20px;
-        }
-        
-        .timeline-item:nth-child(odd) {
-            left: 0;
-            text-align: right;
-            padding-right: 50px;
-        }
-        
-        .timeline-item:nth-child(even) {
-            left: 50%;
-            text-align: left;
-            padding-left: 50px;
-        }
-        
-        .timeline-content {
-            background: rgba(10, 10, 30, 0.7);
-            padding: 20px;
-            border-radius: 10px;
-            border-left: 3px solid #00ffff;
-            transition: transform 0.3s ease;
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
-            backdrop-filter: blur(5px);
-        }
-        
-        .timeline-item:nth-child(odd) .timeline-content {
-            border-left: none;
-            border-right: 3px solid #00ffff;
-        }
-        
-        .timeline-content:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-        
-        .timeline-date {
-            font-weight: bold;
-            color: #00ffff;
-            margin-bottom: 10px;
-            text-shadow: 0 0 5px #00ffff;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 0.7; }
-            50% { opacity: 1; }
-        }
-        
-        /* 新增样式 - 成果展示页面 */
         .video-container {
             display: flex;
             flex-wrap: wrap;
@@ -646,7 +816,11 @@
             box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
         }
         
-        /* 新增样式 - VBA工具页面 */
+        /* VBA工具页面样式 */
+        .vba-container {
+            text-align: center;
+        }
+        
         .flowchart {
             max-width: 800px;
             margin: 40px auto;
@@ -697,10 +871,11 @@
             text-shadow: 0 0 5px #00ffff;
         }
         
-        /* 新增样式 - 展望未来页面 */
+        /* 展望未来页面样式 */
         .future-container {
             max-width: 800px;
             margin: 0 auto;
+            text-align: center;
         }
         
         .future-title {
@@ -739,157 +914,6 @@
             left: 0;
             color: #00ffff;
             text-shadow: 0 0 5px #00ffff;
-        }
-        
-        /* 响应式设计 */
-        @media (max-width: 768px) {
-            .nav-links {
-                gap: 15px;
-            }
-            
-            .nav-link {
-                padding: 6px 12px;
-                font-size: 0.9rem;
-            }
-            
-            h1 {
-                font-size: 2.2rem;
-            }
-            
-            .character, .treasure {
-                font-size: 5rem;
-            }
-            
-            .monster {
-                font-size: 4rem;
-            }
-            
-            .tool-background {
-                flex-direction: column;
-            }
-            
-            .timeline::before {
-                left: 20px;
-            }
-            
-            .timeline-item {
-                width: 100%;
-                left: 0 !important;
-                text-align: left !important;
-                padding: 20px 0 20px 50px !important;
-            }
-            
-            .timeline-item:nth-child(odd) .timeline-content {
-                border-right: none;
-                border-left: 3px solid #00ffff;
-            }
-        }
-        
-        /* Loopy卡通头像样式 */
-        .loopy-avatar {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #ff9ec0, #ff6b9c);
-            position: relative;
-            margin: 0 auto 30px;
-            border: 5px solid #00ffff;
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
-            overflow: hidden;
-        }
-        
-        .loopy-face {
-            width: 140px;
-            height: 140px;
-            background: #ffe4e6;
-            border-radius: 50%;
-            position: absolute;
-            top: 30px;
-            left: 30px;
-        }
-        
-        .loopy-ear {
-            width: 60px;
-            height: 80px;
-            background: #ff9ec0;
-            border-radius: 50%;
-            position: absolute;
-            top: -20px;
-            z-index: 1;
-        }
-        
-        .loopy-ear-left {
-            left: 25px;
-            transform: rotate(-15deg);
-        }
-        
-        .loopy-ear-right {
-            right: 25px;
-            transform: rotate(15deg);
-        }
-        
-        .loopy-eye {
-            width: 25px;
-            height: 35px;
-            background: #333;
-            border-radius: 50%;
-            position: absolute;
-            top: 60px;
-        }
-        
-        .loopy-eye-left {
-            left: 45px;
-        }
-        
-        .loopy-eye-right {
-            right: 45px;
-        }
-        
-        .loopy-eye-sparkle {
-            width: 8px;
-            height: 8px;
-            background: white;
-            border-radius: 50%;
-            position: absolute;
-            top: 8px;
-            left: 5px;
-        }
-        
-        .loopy-nose {
-            width: 20px;
-            height: 12px;
-            background: #ff6b9c;
-            border-radius: 50%;
-            position: absolute;
-            bottom: 50px;
-            left: 90px;
-        }
-        
-        .loopy-mouth {
-            width: 35px;
-            height: 15px;
-            border-bottom: 3px solid #ff6b9c;
-            border-radius: 0 0 20px 20px;
-            position: absolute;
-            bottom: 35px;
-            left: 82px;
-        }
-        
-        .loopy-blush {
-            width: 20px;
-            height: 12px;
-            background: rgba(255, 182, 193, 0.5);
-            border-radius: 50%;
-            position: absolute;
-            top: 75px;
-        }
-        
-        .loopy-blush-left {
-            left: 30px;
-        }
-        
-        .loopy-blush-right {
-            right: 30px;
         }
         
         /* Python工具页面保持原设计 */
@@ -980,6 +1004,57 @@
             color: #ffd700;
             text-shadow: 0 0 10px #ffd700;
         }
+        
+        /* 响应式设计 */
+        @media (max-width: 1024px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .profile-section {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .profile-stats {
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 15px;
+            }
+            
+            .nav-link {
+                padding: 6px 12px;
+                font-size: 0.9rem;
+            }
+            
+            .profile-section {
+                padding: 30px 20px;
+            }
+            
+            .background-card, .timeline-card {
+                padding: 30px 20px;
+            }
+            
+            .profile-title {
+                font-size: 2rem;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .character, .treasure {
+                font-size: 5rem;
+            }
+            
+            .monster {
+                font-size: 4rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1013,84 +1088,119 @@
         </div>
     </nav>
 
-    <!-- 页面1: 关于我 -->
+    <!-- 页面1: 关于我 - 重新设计 -->
     <div id="about" class="page active">
         <div class="container">
-            <h1>关于我</h1>
-            <div class="profile-container">
-                <div class="avatar-container">
-                    <div class="avatar-glow"></div>
-                    <!-- Loopy卡通头像 -->
-                    <div class="loopy-avatar">
-                        <div class="loopy-ear loopy-ear-left"></div>
-                        <div class="loopy-ear loopy-ear-right"></div>
-                        <div class="loopy-face">
-                            <div class="loopy-eye loopy-eye-left">
-                                <div class="loopy-eye-sparkle"></div>
+            <div class="about-container">
+                <!-- 个人信息部分 -->
+                <div class="profile-section">
+                    <div class="avatar-section">
+                        <div class="avatar-container">
+                            <div class="avatar-glow"></div>
+                            <!-- Loopy卡通头像 - 调整版 -->
+                            <div class="loopy-avatar">
+                                <div class="loopy-ear loopy-ear-left"></div>
+                                <div class="loopy-ear loopy-ear-right"></div>
+                                <div class="loopy-face">
+                                    <div class="loopy-eye loopy-eye-left">
+                                        <div class="loopy-eye-sparkle"></div>
+                                    </div>
+                                    <div class="loopy-eye loopy-eye-right">
+                                        <div class="loopy-eye-sparkle"></div>
+                                    </div>
+                                    <div class="loopy-nose"></div>
+                                    <div class="loopy-mouth"></div>
+                                    <div class="loopy-blush loopy-blush-left"></div>
+                                    <div class="loopy-blush loopy-blush-right"></div>
+                                </div>
                             </div>
-                            <div class="loopy-eye loopy-eye-right">
-                                <div class="loopy-eye-sparkle"></div>
-                            </div>
-                            <div class="loopy-nose"></div>
-                            <div class="loopy-mouth"></div>
-                            <div class="loopy-blush loopy-blush-left"></div>
-                            <div class="loopy-blush loopy-blush-right"></div>
                         </div>
-                    </div>
-                </div>
-                <div class="profile-intro">
-                    <p>来自US Team的Cara Song</p>
-                    <p>AI tool开发者 / 超级活人</p>
-                </div>
-                
-                <!-- 工具背景板块 -->
-                <h2>工具背景</h2>
-                <div class="tool-background">
-                    <div class="background-content">
-                        <div class="background-title">US Team CIB Task 现状</div>
-                        <div class="background-description">
-                            US Team的CIB Task过程中每天日常流程的重复劳动居多，信息来源多样，查询时间占用多。
-                        </div>
-                        <div class="background-stats">
-                            <div class="background-stat">
-                                <div class="stat-percentage">40%</div>
-                                <div class="stat-label">邮件往来</div>
+                        <div class="profile-stats">
+                            <div class="stat-box">
+                                <span class="stat-number">50+</span>
+                                <div class="stat-label">项目完成</div>
                             </div>
-                            <div class="background-stat">
-                                <div class="stat-percentage">25%</div>
-                                <div class="stat-label">Focal Report</div>
+                            <div class="stat-box">
+                                <span class="stat-number">96%</span>
+                                <div class="stat-label">成功率</div>
                             </div>
-                            <div class="background-stat">
-                                <div class="stat-percentage">30%</div>
-                                <div class="stat-label">查询时间</div>
+                            <div class="stat-box">
+                                <span class="stat-number">2年</span>
+                                <div class="stat-label">经验</div>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="timeline-section">
+                    <div class="profile-info">
+                        <h1 class="profile-title">Cara Song</h1>
+                        <p class="profile-subtitle">来自US Team的AI工具开发者，致力于通过技术创新解决日常工作中的重复劳动问题，让团队专注于更有价值的创造性工作。</p>
+                        
+                        <div class="profile-tags">
+                            <span class="tag">AI工具开发</span>
+                            <span class="tag">Python编程</span>
+                            <span class="tag">流程自动化</span>
+                            <span class="tag">数据分析</span>
+                            <span class="tag">用户体验</span>
+                        </div>
+                        
+                        <p class="profile-subtitle">专注于开发智能工具来优化工作流程，提高团队效率，将重复性任务自动化，释放团队创造力。</p>
+                    </div>
+                </div>
+                
+                <!-- 工具背景和时间线部分 -->
+                <div class="content-grid">
+                    <!-- 工具背景 -->
+                    <div class="background-card">
+                        <h2 class="card-title">工具背景</h2>
+                        <p class="background-description">
+                            US Team的CIB Task过程中每天日常流程的重复劳动居多，信息来源多样，查询时间占用多。通过开发AI工具，我们成功优化了这些流程。
+                        </p>
+                        <div class="background-stats">
+                            <div class="background-stat">
+                                <div class="stat-percentage">40%</div>
+                                <div class="stat-label">邮件往来 - 通过自动化工具减少人工处理时间</div>
+                            </div>
+                            <div class="background-stat">
+                                <div class="stat-percentage">25%</div>
+                                <div class="stat-label">Focal Report - 自动化生成和分析报告</div>
+                            </div>
+                            <div class="background-stat">
+                                <div class="stat-percentage">30%</div>
+                                <div class="stat-label">查询时间 - 智能搜索和数据处理优化</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 时间线 -->
+                    <div class="timeline-card">
+                        <h2 class="card-title">开发历程</h2>
                         <div class="timeline">
                             <div class="timeline-item">
+                                <div class="timeline-marker"></div>
+                                <div class="timeline-date">2025年10月初</div>
                                 <div class="timeline-content">
-                                    <div class="timeline-date">2025年10月初</div>
-                                    <p>开始使用AI Cedric开发工具</p>
+                                    <p>开始使用AI Cedric开发工具，识别流程优化机会</p>
                                 </div>
                             </div>
                             <div class="timeline-item">
+                                <div class="timeline-marker"></div>
+                                <div class="timeline-date">2025年10月中旬</div>
                                 <div class="timeline-content">
-                                    <div class="timeline-date">2025年10月中旬</div>
-                                    <p>对工具进行迭代设计</p>
+                                    <p>对工具进行迭代设计，优化用户体验和功能</p>
                                 </div>
                             </div>
                             <div class="timeline-item">
+                                <div class="timeline-marker"></div>
+                                <div class="timeline-date">2025年10月底</div>
                                 <div class="timeline-content">
-                                    <div class="timeline-date">2025年10月底</div>
-                                    <p>正式开始测试工具</p>
+                                    <p>正式开始测试工具，收集用户反馈</p>
                                 </div>
                             </div>
                             <div class="timeline-item">
+                                <div class="timeline-marker"></div>
+                                <div class="timeline-date">2025年11月</div>
                                 <div class="timeline-content">
-                                    <div class="timeline-date">2025年11月</div>
-                                    <p>正在升级工具</p>
+                                    <p>正在升级工具，扩展更多功能和应用场景</p>
                                 </div>
                             </div>
                         </div>
@@ -1103,11 +1213,13 @@
     <!-- 页面2: Python工具 - AI冒险之旅 -->
     <div id="python" class="page">
         <div class="container">
-            <div class="hero">
-                <div class="character">⚔️</div>
-                <h1>AI冒险之旅</h1>
-                <p class="story-text">勇敢的开发者啊，你即将踏上一次非凡的旅程！<br>在这个数字世界中，你将面对挑战、学习魔法（代码），最终获得改变世界的宝藏。</p>
-                <button class="btn" onclick="showAdventurePage(2)">开始冒险 🚀</button>
+            <div class="python-container">
+                <div class="hero">
+                    <div class="character">⚔️</div>
+                    <h1>AI冒险之旅</h1>
+                    <p class="story-text">勇敢的开发者啊，你即将踏上一次非凡的旅程！<br>在这个数字世界中，你将面对挑战、学习魔法（代码），最终获得改变世界的宝藏。</p>
+                    <button class="btn" onclick="showAdventurePage(2)">开始冒险 🚀</button>
+                </div>
             </div>
         </div>
     </div>
@@ -1115,37 +1227,39 @@
     <!-- 页面3: 成果展示 -->
     <div id="results" class="page">
         <div class="container">
-            <h1>成果展示</h1>
-            
-            <div class="video-container">
-                <div class="video-placeholder">
-                    工具实操视频1 - 待上传
+            <div class="results-container">
+                <h1>成果展示</h1>
+                
+                <div class="video-container">
+                    <div class="video-placeholder">
+                        工具实操视频1 - 待上传
+                    </div>
+                    <div class="video-placeholder">
+                        工具实操视频2 - 待上传
+                    </div>
                 </div>
-                <div class="video-placeholder">
-                    工具实操视频2 - 待上传
+                
+                <h2>成果统计</h2>
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="stat-number">50+</span>
+                        <p>用户覆盖</p>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">96%</span>
+                        <p>准确率</p>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">500+</span>
+                        <p>每月节省小时</p>
+                    </div>
                 </div>
-            </div>
-            
-            <h2>成果统计</h2>
-            <div class="stats">
-                <div class="stat-item">
-                    <span class="stat-number">50+</span>
-                    <p>用户覆盖</p>
+                
+                <div class="story-text">
+                    <p>✨ <strong>任务时间：4小时 → 8分钟</strong>（效率提升30倍！）</p>
+                    <p>💫 <strong>每月为团队节省500+创造小时</strong></p>
+                    <p>🌟 <strong>将时间真正还给创造者</strong></p>
                 </div>
-                <div class="stat-item">
-                    <span class="stat-number">96%</span>
-                    <p>准确率</p>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">500+</span>
-                    <p>每月节省小时</p>
-                </div>
-            </div>
-            
-            <div class="story-text">
-                <p>✨ <strong>任务时间：4小时 → 8分钟</strong>（效率提升30倍！）</p>
-                <p>💫 <strong>每月为团队节省500+创造小时</strong></p>
-                <p>🌟 <strong>将时间真正还给创造者</strong></p>
             </div>
         </div>
     </div>
@@ -1153,39 +1267,43 @@
     <!-- 页面4: VBA工具 -->
     <div id="vba" class="page">
         <div class="container">
-            <h1>VBA工具</h1>
-            
-            <div class="flowchart">
-                <div class="flowchart-title">自动化工具流程图</div>
-                <div class="flowchart-content">
-                    <div class="flowchart-step">数据输入与预处理</div>
-                    <div class="flowchart-step">核心算法处理</div>
-                    <div class="flowchart-step">结果验证与优化</div>
-                    <div class="flowchart-step">输出最终报告</div>
+            <div class="vba-container">
+                <h1>VBA工具</h1>
+                
+                <div class="flowchart">
+                    <div class="flowchart-title">自动化工具流程图</div>
+                    <div class="flowchart-content">
+                        <div class="flowchart-step">数据输入与预处理</div>
+                        <div class="flowchart-step">核心算法处理</div>
+                        <div class="flowchart-step">结果验证与优化</div>
+                        <div class="flowchart-step">输出最终报告</div>
+                    </div>
                 </div>
+                
+                <p class="story-text">
+                    通过VBA工具，我们实现了办公自动化的重大突破，将原本需要数小时的手动操作缩短到几分钟内完成。
+                </p>
             </div>
-            
-            <p class="story-text">
-                通过VBA工具，我们实现了办公自动化的重大突破，将原本需要数小时的手动操作缩短到几分钟内完成。
-            </p>
         </div>
     </div>
 
     <!-- 页面5: 展望未来 -->
     <div id="future" class="page">
         <div class="container">
-            <h1 class="future-title">实现从"0"到"1"的跨越</h1>
-            
-            <div class="future-content">
-                <p>未来，我们将继续利用AI技术开发更多高效、智能的工具，帮助团队提升工作效率，释放创造力。</p>
-                <p>我们计划在以下领域进行深入探索：</p>
-                <ul>
-                    <li>自然语言处理在文档自动化中的应用</li>
-                    <li>机器学习算法优化数据处理流程</li>
-                    <li>智能决策支持系统的开发</li>
-                    <li>跨平台工具集成与优化</li>
-                </ul>
-                <p style="margin-top: 20px;">我们的目标是让每一个重复性工作都能找到自动化解决方案，让团队成员专注于更有价值的创造性工作。</p>
+            <div class="future-container">
+                <h1 class="future-title">实现从"0"到"1"的跨越</h1>
+                
+                <div class="future-content">
+                    <p>未来，我们将继续利用AI技术开发更多高效、智能的工具，帮助团队提升工作效率，释放创造力。</p>
+                    <p>我们计划在以下领域进行深入探索：</p>
+                    <ul>
+                        <li>自然语言处理在文档自动化中的应用</li>
+                        <li>机器学习算法优化数据处理流程</li>
+                        <li>智能决策支持系统的开发</li>
+                        <li>跨平台工具集成与优化</li>
+                    </ul>
+                    <p style="margin-top: 20px;">我们的目标是让每一个重复性工作都能找到自动化解决方案，让团队成员专注于更有价值的创造性工作。</p>
+                </div>
             </div>
         </div>
     </div>
