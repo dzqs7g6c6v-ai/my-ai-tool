@@ -3,764 +3,1546 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI 自动化工具展示</title>
+    <title>AI冒险之旅：从想法到现实</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        * {
             margin: 0;
             padding: 0;
-            background-color: #1a1a2e;
-            color: #ffffff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            overflow-x: hidden;
-            background-image: linear-gradient(135deg, #1a1a2e 0%, #0f0c29 100%);
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
         }
-
+        
+        body {
+            background: #0a0a1a;
+            min-height: 100vh;
+            color: white;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* 科技感背景 */
         .tech-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none;
             z-index: -1;
-            opacity: 0.1;
-            background-image: radial-gradient(#2c3e50 1px, transparent 1px);
-            background-size: 40px 40px;
-        }
-
-        .navbar {
-            width: 100%;
-            background-color: rgba(26, 26, 46, 0.8);
-            backdrop-filter: blur(10px);
-            padding: 15px 0;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .nav-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-        }
-
-        .nav-list li a {
-            color: #ffffff;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            padding: 5px 10px;
-            transition: color 0.3s, border-bottom 0.3s;
-            border-bottom: 2px solid transparent;
-        }
-
-        .nav-list li a.active, .nav-list li a:hover {
-            color: #50e3c2;
-            border-bottom: 2px solid #50e3c2;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .page {
-            width: 100%;
-            display: none;
-            padding: 60px 0;
-            animation: fadeIn 0.8s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .page.active {
-            display: block;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            color: #50e3c2;
-            margin-bottom: 10px;
-            text-shadow: 0 0 10px rgba(80, 227, 194, 0.5);
-        }
-
-        .hero p.intro-text {
-            font-size: 1.2rem;
-            color: #ccc;
-            margin-bottom: 40px;
-        }
-
-        /* ----- 居中和按钮样式 START ----- */
-
-        /* 新增：用于居中Hero和按钮的容器 */
-        .centered-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center; /* 水平居中 */
-            justify-content: center;
-            width: 100%;
-        }
-
-        .story-text {
-            max-width: 800px;
-            font-size: 1.1rem;
-            line-height: 1.8;
-            text-align: left;
-            margin: 20px 0 40px;
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
-            border-left: 5px solid #50e3c2;
-        }
-
-        .nav-buttons {
-            margin-top: 40px;
-            display: flex;
-            justify-content: center; /* 确保按钮组居中 */
-            gap: 20px;
-            width: 100%;
-        }
-
-        .btn {
-            background-color: #50e3c2;
-            color: #1a1a2e;
-            border: none;
-            padding: 12px 25px;
-            font-size: 1rem;
-            font-weight: bold;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
-        }
-
-        .btn:hover {
-            background-color: #3aa68f;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(80, 227, 194, 0.5);
-        }
-
-        .btn-next {
-            background-color: #3b82f6;
-            color: white;
-        }
-
-        .btn-next:hover {
-            background-color: #1d4ed8;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.5);
+            overflow: hidden;
         }
         
-        /* ----- 居中和按钮样式 END ----- */
-
-        /* ----- 冒险流程样式 ----- */
-        .character, .monster {
-            font-size: 6rem;
-            margin: 20px 0;
-            display: block;
-            line-height: 1;
-        }
-
-        .battle-info {
-            display: flex;
-            justify-content: center;
-            gap: 50px;
-            margin-top: 30px;
-            text-align: left;
-            max-width: 800px;
+        .grid-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
         }
-
-        .battle-info h2 {
-            color: #50e3c2;
+        
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.2), transparent);
+            filter: blur(10px);
+            animation: float 15s infinite ease-in-out;
+        }
+        
+        .shape:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .shape:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            top: 60%;
+            left: 80%;
+            animation-delay: -5s;
+        }
+        
+        .shape:nth-child(3) {
+            width: 400px;
+            height: 400px;
+            top: 30%;
+            left: 70%;
+            animation-delay: -10s;
+        }
+        
+        .glowing-orbs {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .orb {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #00ffff;
+            box-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff;
+            animation: orbMove 8s infinite linear;
+        }
+        
+        .orb:nth-child(1) {
+            top: 20%;
+            left: 20%;
+            animation-delay: 0s;
+        }
+        
+        .orb:nth-child(2) {
+            top: 70%;
+            left: 30%;
+            animation-delay: -2s;
+        }
+        
+        .orb:nth-child(3) {
+            top: 40%;
+            left: 80%;
+            animation-delay: -4s;
+        }
+        
+        .orb:nth-child(4) {
+            top: 80%;
+            left: 70%;
+            animation-delay: -6s;
+        }
+        
+        @keyframes gridMove {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(50px, 50px);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            25% {
+                transform: translate(50px, -50px) scale(1.1);
+            }
+            50% {
+                transform: translate(-30px, 30px) scale(0.9);
+            }
+            75% {
+                transform: translate(-50px, -30px) scale(1.05);
+            }
+        }
+        
+        @keyframes orbMove {
+            0%, 100% {
+                transform: translate(0, 0);
+                opacity: 0.7;
+            }
+            25% {
+                transform: translate(100px, 50px);
+                opacity: 1;
+            }
+            50% {
+                transform: translate(50px, 100px);
+                opacity: 0.5;
+            }
+            75% {
+                transform: translate(-50px, 50px);
+                opacity: 0.8;
+            }
+        }
+        
+        /* 导航栏样式 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 30, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 15px 0;
+            box-shadow: 0 2px 20px rgba(0, 255, 255, 0.2);
+            border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .logo {
             font-size: 1.5rem;
-            border-bottom: 2px solid #50e3c2;
-            padding-bottom: 5px;
-            margin-bottom: 15px;
+            font-weight: bold;
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff;
         }
-
-        .battle-info p {
-            background-color: rgba(255, 255, 255, 0.05);
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-link {
+            color: white;
+            text-decoration: none;
             padding: 8px 15px;
-            margin: 8px 0;
-            border-radius: 4px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
         }
-
-        /* ----- 宝藏页面样式增强 (adventure-page5) ----- */
-        #adventure-page5 .treasure {
-            font-size: 12rem; /* 放大奖杯图标 */
-            margin: 60px 0; /* 增加上下间距 */
-            animation: pulse 1.5s infinite;
+        
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .nav-link:hover::before {
+            left: 100%;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            background: rgba(0, 255, 255, 0.1);
+            color: #00ffff;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+        }
+        
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding: 100px 20px 50px;
+        }
+        
+        .active {
+            display: block;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* 关于我页面重新设计 */
+        .about-container {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+        }
+        
+        .profile-section {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            padding: 40px;
+            background: rgba(10, 10, 30, 0.7);
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+        }
+        
+        .avatar-section {
+            flex-shrink: 0;
+            text-align: center;
+        }
+        
+        .avatar-container {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            margin-bottom: 20px;
+        }
+        
+        .avatar-glow {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            right: -15px;
+            bottom: -15px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0,255,255,0.4) 0%, rgba(0,255,255,0) 70%);
+            z-index: -1;
+            animation: pulse 3s infinite;
+        }
+        
+        .profile-info {
+            flex: 1;
+        }
+        
+        .profile-title {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff;
+        }
+        
+        .profile-subtitle {
+            font-size: 1.3rem;
+            color: #a0a0ff;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        
+        .profile-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+        
+        .tag {
+            background: rgba(0, 255, 255, 0.1);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+        }
+        
+        /* 工具背景和时间线部分 */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        
+        .background-card, .timeline-card {
+            background: rgba(10, 10, 30, 0.7);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+        }
+        
+        .card-title {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: #00ffff;
+            text-shadow: 0 0 8px #00ffff;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .card-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: #00ffff;
+            border-radius: 2px;
+        }
+        
+        .background-description {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 30px;
+            color: #e0e0ff;
+        }
+        
+        .background-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .background-stat {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .background-stat:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 255, 255, 0.2);
+        }
+        
+        .stat-percentage {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #00ffff;
+            min-width: 80px;
+            text-shadow: 0 0 10px #00ffff;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            text-align: left;
+            color: #e0e0ff;
+        }
+        
+        .timeline {
+            position: relative;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: #00ffff;
+            box-shadow: 0 0 10px #00ffff;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 35px;
+            padding-left: 80px;
+        }
+        
+        .timeline-marker {
+            position: absolute;
+            left: 20px;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            background: #00ffff;
+            border-radius: 50%;
+            box-shadow: 0 0 15px #00ffff;
+            z-index: 2;
+        }
+        
+        .timeline-date {
+            font-weight: bold;
+            color: #00ffff;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 3px solid #00ffff;
+            transition: all 0.3s ease;
+        }
+        
+        .timeline-content:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
         }
         
         @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        #adventure-page5 h1 {
-            font-size: 4rem; /* 放大恭喜标题 */
-            margin-bottom: 30px;
-            color: #ffcc00; /* 金色 */
-        }
-
-        #adventure-page5 .story-text {
-            max-width: 900px; /* 略微拓宽文本区域 */
-            font-size: 1.4rem;
-            border-left: 5px solid #ffcc00;
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
         }
         
-        /* ----- 成果展示样式 ----- */
-        .video-section {
-            margin: 30px auto;
-            max-width: 900px;
-            width: 100%;
+        /* Loopy卡通头像样式 - 调整版 */
+        .loopy-avatar {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff9ec0, #ff6b9c);
+            position: relative;
+            border: 5px solid #00ffff;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+            overflow: hidden;
         }
-
-        .video-placeholder {
-            height: 500px;
-            background-color: #2c3e50;
-            border-radius: 10px;
+        
+        .loopy-face {
+            width: 200px;
+            height: 200px;
+            background: #ffe4e6;
+            border-radius: 50%;
+            position: absolute;
+            top: 40px;
+            left: 40px;
+        }
+        
+        .loopy-ear {
+            width: 80px;
+            height: 100px;
+            background: #ff9ec0;
+            border-radius: 50%;
+            position: absolute;
+            top: -30px;
+            z-index: 1;
+        }
+        
+        .loopy-ear-left {
+            left: 25px;
+            transform: rotate(-15deg);
+        }
+        
+        .loopy-ear-right {
+            right: 25px;
+            transform: rotate(15deg);
+        }
+        
+        .loopy-eye {
+            width: 32px;
+            height: 42px;
+            background: #333;
+            border-radius: 50%;
+            position: absolute;
+            top: 75px;
+        }
+        
+        .loopy-eye-left {
+            left: 60px;
+        }
+        
+        .loopy-eye-right {
+            right: 60px;
+        }
+        
+        .loopy-eye-sparkle {
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 12px;
+            left: 7px;
+        }
+        
+        .loopy-nose {
+            width: 24px;
+            height: 16px;
+            background: #ff6b9c;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 65px;
+            left: 128px;
+        }
+        
+        .loopy-mouth {
+            width: 42px;
+            height: 20px;
+            border-bottom: 3px solid #ff6b9c;
+            border-radius: 0 0 20px 20px;
+            position: absolute;
+            bottom: 50px;
+            left: 119px;
+        }
+        
+        .loopy-blush {
+            width: 26px;
+            height: 16px;
+            background: rgba(255, 182, 193, 0.5);
+            border-radius: 50%;
+            position: absolute;
+            top: 90px;
+        }
+        
+        .loopy-blush-left {
+            left: 45px;
+        }
+        
+        .loopy-blush-right {
+            right: 45px;
+        }
+        
+        /* Python工具页面样式 - 修复版 */
+        .python-container {
+            text-align: center;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .hero {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .character {
+            font-size: 8rem;
+            margin: 30px 0;
+            animation: float 3s ease-in-out infinite;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 1.5rem;
-            color: #50e3c2;
-            border: 2px dashed #50e3c2;
+            width: 100%;
         }
         
-        .demo-description {
-            margin-top: 30px;
-            text-align: left;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .demo-description h3 {
-            color: #50e3c2;
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-        }
-
-        /* 新增：成果展示页面的数据框容器 */
-        .stats-container {
+        .monster {
+            font-size: 6rem;
+            margin: 40px 0;
+            animation: shake 0.5s ease-in-out infinite;
             display: flex;
-            justify-content: space-around;
-            gap: 20px;
-            width: 90%;
-            max-width: 1000px;
-            margin: 40px auto 0;
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.1); /* 轻微透明背景 */
-            border-radius: 12px;
-            border: 2px solid #50e3c2; /* 突出边框颜色 */
-            box-shadow: 0 0 20px rgba(80, 227, 194, 0.5); /* 柔和的发光效果 */
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 10px;
-            flex: 1; /* 平均分配空间 */
-        }
-
-        .stat-item .value {
-            font-size: 2.5rem;
-            color: #50e3c2; /* 突出数值的颜色 */
-            font-weight: bold;
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .stat-item .label {
-            font-size: 1rem;
-            color: #ccc;
-            display: block;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
         }
         
-        /* ----- VBA 流程图样式 ----- */
-        .flowchart-container {
-            margin: 40px auto;
-            max-width: 1000px;
+        .treasure {
+            font-size: 8rem;
+            margin: 40px 0;
+            animation: glow 2s ease-in-out infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
         }
-
-        .flowchart {
-            list-style: none;
-            padding: 0;
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            color: #00ffff;
+            position: relative;
+            text-align: center;
+            width: 100%;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #00ffff, transparent);
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin: 30px 0;
+            color: #00ffff;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .story-text {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            margin: 30px auto;
+            max-width: 800px;
+            background: rgba(10, 10, 30, 0.7);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid #00ffff;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            text-align: center;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 20px 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+        }
+        
+        .btn-next {
+            background: linear-gradient(45deg, #00b894, #00a085);
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+        
+        .stat-item {
+            background: rgba(10, 10, 30, 0.7);
+            padding: 25px;
+            border-radius: 15px;
+            min-width: 200px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #00ffff;
+            display: block;
+            text-shadow: 0 0 10px #00ffff;
+        }
+        
+        /* 动画效果 */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
+        @keyframes glow {
+            0%, 100% { 
+                transform: scale(1);
+                text-shadow: 0 0 20px #00ffff;
+            }
+            50% { 
+                transform: scale(1.1);
+                text-shadow: 0 0 30px #00ffff, 0 0 40px #00ffff;
+            }
+        }
+        
+        .battle-info {
+            display: flex;
+            gap: 30px;
+            margin: 40px 0;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+        
+        .problem, .solution {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(10, 10, 30, 0.7);
+            padding: 25px;
+            border-radius: 15px;
+            border: 2px solid;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            text-align: center;
+        }
+        
+        .problem {
+            border-color: #ff6b6b;
+        }
+        
+        .solution {
+            border-color: #00b894;
+        }
+        
+        .nav-buttons {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        /* Python工具页面保持原设计 */
+        #python {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+        }
+        
+        #python .story-text {
+            background: rgba(0,0,0,0.3);
+            border-left: 5px solid #ffd700;
+            box-shadow: none;
+            backdrop-filter: none;
+        }
+        
+        #python h1 {
+            color: white;
+        }
+        
+        #python h1::after {
+            background: linear-gradient(90deg, transparent, #ffd700, transparent);
+        }
+        
+        #python h2 {
+            color: #ffd700;
+        }
+        
+        #python .stat-item {
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,215,0,0.3);
+            box-shadow: none;
+        }
+        
+        #python .stat-number {
+            color: #ffd700;
+            text-shadow: 0 0 10px #ffd700;
+        }
+        
+        /* 冒险之旅子页面保持原设计 */
+        #adventure-page2,
+        #adventure-page3,
+        #adventure-page4,
+        #adventure-page5 {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+        }
+        
+        #adventure-page2 .story-text,
+        #adventure-page3 .story-text,
+        #adventure-page4 .story-text,
+        #adventure-page5 .story-text {
+            background: rgba(0,0,0,0.3);
+            border-left: 5px solid #ffd700;
+            box-shadow: none;
+            backdrop-filter: none;
+        }
+        
+        #adventure-page2 h1,
+        #adventure-page3 h1,
+        #adventure-page4 h1,
+        #adventure-page5 h1 {
+            color: white;
+        }
+        
+        #adventure-page2 h1::after,
+        #adventure-page3 h1::after,
+        #adventure-page4 h1::after,
+        #adventure-page5 h1::after {
+            background: linear-gradient(90deg, transparent, #ffd700, transparent);
+        }
+        
+        #adventure-page2 h2,
+        #adventure-page3 h2,
+        #adventure-page4 h2,
+        #adventure-page5 h2 {
+            color: #ffd700;
+        }
+        
+        #adventure-page3 .problem,
+        #adventure-page3 .solution,
+        #adventure-page4 .problem,
+        #adventure-page4 .solution,
+        #adventure-page5 .stat-item {
+            background: rgba(0,0,0,0.4);
+            box-shadow: none;
+            backdrop-filter: none;
+        }
+        
+        #adventure-page5 .stat-number {
+            color: #ffd700;
+            text-shadow: 0 0 10px #ffd700;
+        }
+        
+        /* 成果展示页面样式 - 修改版 */
+        .results-container {
+            text-align: center;
+        }
+        
+        .video-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            margin: 40px 0;
+        }
+        
+        .video-placeholder {
+            width: 100%;
+            max-width: 500px;
+            height: 300px;
+            background: rgba(10, 10, 30, 0.7);
+            border-radius: 15px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-
-        .flowchart .step {
-            flex-basis: calc(20% - 20px);
-            padding: 20px;
-            background-color: #3b82f6;
-            border-radius: 8px;
-            color: white;
-            font-weight: bold;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s;
-        }
-        
-        .flowchart .step:hover {
-            transform: translateY(-5px);
-        }
-
-        .flowchart .icon {
-            font-size: 2rem;
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        .flowchart .arrow {
-            font-size: 2rem;
-            color: #50e3c2;
-            margin: 0 10px;
-        }
-        
-        /* VBA 核心价值 */
-        .key-features {
-            margin-top: 40px;
-            text-align: left;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
-        }
-        
-        .key-features h3 {
-            color: #ffcc00;
-            border-bottom: 1px solid #ffcc00;
-            padding-bottom: 5px;
-            margin-bottom: 15px;
-        }
-        
-        .key-features .impact-text {
+            justify-content: center;
+            border: 2px dashed #00ffff;
             font-size: 1.2rem;
-            color: #fff;
-            margin-bottom: 15px;
-            font-style: italic;
-        }
-
-        .key-features ul {
-            list-style: disc;
-            padding-left: 20px;
-            color: #ccc;
+            color: #00ffff;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
         }
         
-        .key-features li {
-            margin-bottom: 8px;
+        .video-placeholder:hover {
+            background: rgba(10, 10, 30, 0.9);
+            transform: scale(1.02);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
         }
-
+        
+        /* VBA工具页面样式 */
+        .vba-container {
+            text-align: center;
+        }
+        
+        .flowchart {
+            max-width: 800px;
+            margin: 40px auto;
+            background: rgba(10, 10, 30, 0.7);
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid #00ffff;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+        }
+        
+        .flowchart-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #00ffff;
+            text-shadow: 0 0 5px #00ffff;
+        }
+        
+        .flowchart-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .flowchart-step {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: left;
+            position: relative;
+            padding-left: 50px;
+            transition: all 0.3s ease;
+        }
+        
+        .flowchart-step:hover {
+            background: rgba(255,255,255,0.15);
+            transform: translateX(5px);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        }
+        
+        .flowchart-step::before {
+            content: '→';
+            position: absolute;
+            left: 20px;
+            color: #00ffff;
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-shadow: 0 0 5px #00ffff;
+        }
+        
+        /* 展望未来页面样式 */
+        .future-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .future-title {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #00ffff;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+        
+        .future-content {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            background: rgba(10, 10, 30, 0.7);
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 30px;
+            text-align: left;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+        }
+        
+        .future-content ul {
+            margin-top: 20px;
+            margin-left: 30px;
+        }
+        
+        .future-content li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .future-content li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: #00ffff;
+            text-shadow: 0 0 5px #00ffff;
+        }
+        
+        /* 宝藏洞窟特殊样式 */
+        #adventure-page5 .treasure {
+            font-size: 12rem;
+            animation: glow 2s ease-in-out infinite;
+        }
+        
+        #adventure-page5 h1 {
+            font-size: 3.5rem;
+            margin-bottom: 40px;
+        }
+        
+        #adventure-page5 .story-text {
+            font-size: 2rem;
+            line-height: 1.6;
+            margin: 40px 0;
+        }
+        
         /* 响应式设计 */
-        @media (max-width: 992px) {
-            .hero h1 {
-                font-size: 2.5rem;
+        @media (max-width: 1024px) {
+            .content-grid {
+                grid-template-columns: 1fr;
             }
-            .battle-info {
+            
+            .profile-section {
                 flex-direction: column;
-                gap: 30px;
-                padding: 0 20px;
-            }
-            .flowchart {
-                flex-direction: column;
-            }
-            .flowchart .step {
-                flex-basis: 80%;
-                margin-bottom: 20px;
-            }
-            .flowchart .arrow {
-                transform: rotate(90deg);
-                margin: 10px 0;
+                text-align: center;
             }
         }
         
         @media (max-width: 768px) {
-            .nav-list {
+            .nav-links {
                 gap: 15px;
             }
-            .nav-buttons {
-                flex-direction: column;
-                gap: 10px;
+            
+            .nav-link {
+                padding: 6px 12px;
+                font-size: 0.9rem;
             }
-            .btn {
-                width: 80%;
-                margin: 0 auto;
+            
+            .profile-section {
+                padding: 30px 20px;
             }
-            .stats-container {
-                flex-direction: column;
-                width: 95%;
-                padding: 15px;
+            
+            .background-card, .timeline-card {
+                padding: 30px 20px;
             }
-            .stat-item .value {
+            
+            .profile-title {
                 font-size: 2rem;
             }
-            .video-placeholder {
-                height: 300px;
+            
+            h1 {
+                font-size: 2.2rem;
             }
-            .story-text {
-                font-size: 1rem;
+            
+            .character, .treasure {
+                font-size: 5rem;
             }
-            #adventure-page5 .treasure {
-                font-size: 8rem;
+            
+            .monster {
+                font-size: 4rem;
             }
-            #adventure-page5 h1 {
-                font-size: 3rem;
+            
+            .avatar-container {
+                width: 220px;
+                height: 220px;
+            }
+            
+            .loopy-avatar {
+                width: 220px;
+                height: 220px;
+            }
+            
+            .loopy-face {
+                width: 160px;
+                height: 160px;
+                top: 30px;
+                left: 30px;
+            }
+            
+            .loopy-nose {
+                bottom: 55px;
+                left: 98px;
+            }
+            
+            .loopy-mouth {
+                bottom: 40px;
+                left: 89px;
             }
         }
     </style>
 </head>
 <body>
+    <!-- 科技感背景 -->
+    <div class="tech-bg">
+        <div class="grid-lines"></div>
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+        <div class="glowing-orbs">
+            <div class="orb"></div>
+            <div class="orb"></div>
+            <div class="orb"></div>
+            <div class="orb"></div>
+        </div>
+    </div>
 
-    <div class="tech-bg"></div>
-
+    <!-- 导航栏 -->
     <nav class="navbar">
-        <div class="container">
-            <ul class="nav-list">
-                <li><a href="#about" class="nav-link" data-page="about">首页</a></li>
-                <li><a href="#python" class="nav-link active" data-page="python">Python 工具</a></li>
-                <li><a href="#results" class="nav-link" data-page="results">成果展示</a></li>
-                <li><a href="#vba" class="nav-link" data-page="vba">VBA 工具</a></li>
-                <li><a href="#future" class="nav-link" data-page="future">未来展望</a></li>
-            </ul>
+        <div class="nav-container">
+            <div class="logo">AI冒险之旅</div>
+            <div class="nav-links">
+                <a href="#" class="nav-link active" onclick="showPage('about')">关于我</a>
+                <a href="#" class="nav-link" onclick="showPage('python')">Python工具</a>
+                <a href="#" class="nav-link" onclick="showPage('results')">Python成果</a>
+                <a href="#" class="nav-link" onclick="showPage('vba')">VBA工具</a>
+                <a href="#" class="nav-link" onclick="showPage('vba-results')">VBA成果</a>
+                <a href="#" class="nav-link" onclick="showPage('future')">展望未来</a>
+            </div>
         </div>
     </nav>
 
-    <div id="about" class="page active" data-nav-link="about">
-        <div class="container about-container">
-            <div class="hero">
-                <h1>💻 ACT 自动化工具</h1>
-                <p class="intro-text">利用 Python 和 VBA 技术，打造高效、智能的自动化解决方案，解放您的创造力！</p>
-                <span style="font-size: 8rem; display: block; margin: 30px 0;">🤖</span>
-            </div>
-            <div class="nav-buttons">
-                <button class="btn btn-next" onclick="showPage('python')">进入 AI 工具世界</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="python" class="page" data-nav-link="python">
-        <div class="container python-container">
-            <div class="hero centered-content">
-                <h1>启程：AI工具的召唤 ORIGIN</h1>
-                <span class="character">💡</span>
-                <div class="story-text">
-                    <p>在遥远的ACT王国中，我们的魔法师团队每天都要进行2小时的数据搬运...
-                    宝贵的创造力被浪费在重复劳动中。</p>
-                    <br>
-                    <p>直到有一天，我们听到了远古的召唤：
-                    **'让工具处理重复，让人专注创造'**</p>
-                    <br>
-                    <p>于是，AI勇士踏上了这场AI工具的创造之旅！</p>
-                </div>
-                <div class="nav-buttons">
-                    <button class="btn btn-next" onclick="showPage('adventure-page2')">继续前进：⚔️ 第一场战斗</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="adventure-page2" class="page" data-nav-link="python">
-        <div class="container python-container">
-            <div class="hero centered-content">
-                <h1>第一场战斗：迷雾森林的定位怪兽</h1>
-                <span class="monster">👻</span>
-                <div class="battle-info">
-                    <div class="problem">
-                        <h2>🐉 怪兽的能力</h2>
-                        <p>动态加载的网页元素</p>
-                        <p>复杂多变的页面结构</p>
+    <!-- 页面1: 关于我 - 重新设计 -->
+    <div id="about" class="page active">
+        <div class="container">
+            <div class="about-container">
+                <!-- 个人信息部分 -->
+                <div class="profile-section">
+                    <div class="avatar-section">
+                        <div class="avatar-container">
+                            <div class="avatar-glow"></div>
+                            <!-- Loopy卡通头像 - 调整版 -->
+                            <div class="loopy-avatar">
+                                <div class="loopy-ear loopy-ear-left"></div>
+                                <div class="loopy-ear loopy-ear-right"></div>
+                                <div class="loopy-face">
+                                    <div class="loopy-eye loopy-eye-left">
+                                        <div class="loopy-eye-sparkle"></div>
+                                    </div>
+                                    <div class="loopy-eye loopy-eye-right">
+                                        <div class="loopy-eye-sparkle"></div>
+                                    </div>
+                                    <div class="loopy-nose"></div>
+                                    <div class="loopy-mouth"></div>
+                                    <div class="loopy-blush loopy-blush-left"></div>
+                                    <div class="loopy-blush loopy-blush-right"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="solution">
-                        <h2>⚔️ 你的魔法武器</h2>
-                        <p>XPath精准定位术</p>
-                        <p>父级元素辅助定位</p>
-                    </div>
-                </div>
-                <div class="nav-buttons">
-                    <button class="btn" onclick="showPage('python')">返回上一页</button>
-                    <button class="btn btn-next" onclick="showPage('adventure-page3')">继续前进：🐲 第二场战斗</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="adventure-page3" class="page" data-nav-link="python">
-        <div class="container python-container">
-            <div class="hero centered-content">
-                <h1>第二场战斗：资源沼泽的吞噬者</h1>
-                <span class="monster">🦠</span>
-                <div class="battle-info">
-                    <div class="problem">
-                        <h2>🐲 怪兽的能力</h2>
-                        <p>占用CPU资源</p>
-                        <p>窗口弹出式运行</p>
-                        <p>用户体验差</p>
-                    </div>
-                    <div class="solution">
-                        <h2>🛡️ 你的防御神器</h2>
-                        <p>浏览器无头模式 (Headless Mode)</p>
-                        <p>无痕环境运行 (Incognito Mode)</p>
-                    </div>
-                </div>
-                <div class="nav-buttons">
-                    <button class="btn" onclick="showPage('adventure-page2')">返回上一页</button>
-                    <button class="btn btn-next" onclick="showPage('adventure-page4')">继续前进：💡 最终挑战</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="adventure-page4" class="page" data-nav-link="python">
-        <div class="container python-container">
-            <div class="hero centered-content">
-                <h1>最终挑战：复杂业务逻辑的迷宫</h1>
-                <span class="monster">🧩</span>
-                <div class="battle-info">
-                    <div class="problem">
-                        <h2>🐲 怪兽的能力</h2>
-                        <p>多达十几种任务类型</p>
-                        <p>输入文件格式不统一</p>
-                    </div>
-                    <div class="solution">
-                        <h2>⚔️ 你的魔法武器</h2>
-                        <p>模块化设计：分块处理不同任务</p>
-                        <p>配置文件中心化管理</p>
-                    </div>
-                </div>
-                <div class="nav-buttons">
-                    <button class="btn" onclick="showPage('adventure-page3')">返回上一页</button>
-                    <button class="btn btn-next" onclick="showPage('adventure-page5')">胜利：获得宝藏 🏆</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="adventure-page5" class="page" data-nav-link="python">
-        <div class="container python-container">
-            <div class="hero centered-content">
-                <h1>恭喜！任务完成！</h1>
-                <span class="treasure">🏆</span>
-                <div class="story-text">
-                    <p>AI勇士成功征服了重复劳动的怪兽，并带回了最大的宝藏：**自由的创造力**。</p>
-                    <br>
-                    <p>现在，魔法师团队已从繁琐的任务中解放，可以专注于ACT王国的未来发展和创新！</p>
-                </div>
-                <div class="nav-buttons">
-                    <button class="btn" onclick="showPage('adventure-page4')">返回挑战页面</button>
-                    <button class="btn btn-next" onclick="showPage('results')">查看成果展示</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div id="results" class="page" data-nav-link="results">
-        <div class="container results-container">
-            <div class="hero">
-                <h1>🎥 成果展示：Python 工具的实战魔法</h1>
-                <p class="intro-text">观看 AI 工具如何高效、精准地完成各种复杂任务，将重复性工作转化为瞬间操作。</p>
-
-                <div class="video-section">
-                    <div class="video-placeholder">
-                        [这里是 **pythonvideo** 播放器]
-                    </div>
-                </div>
-                
-                <div class="demo-description">
-                    <h3>🎬 演示内容：从数据源到最终结果的自动化流程</h3>
-                    <p>视频展示了工具如何自动登录系统、抓取复杂表格数据、处理多条件逻辑判断，并最终生成标准化报告。</p>
-                </div>
-            </div>
-
-            <div class="stats-container">
-                <div class="stat-item">
-                    <span class="value">100K+</span>
-                    <span class="label">数据处理量（每日）</span>
-                </div>
-                <div class="stat-item">
-                    <span class="value">95%</span>
-                    <span class="label">效率提升百分比</span>
-                </div>
-                <div class="stat-item">
-                    <span class="value">160+</span>
-                    <span class="label">节省工时（每月）</span>
-                </div>
-            </div>
-            
-            <div class="nav-buttons centered-content">
-                <button class="btn" onclick="showPage('adventure-page5')">返回上一页</button>
-                <button class="btn btn-next" onclick="showPage('vba')">继续前进：📊 VBA 工具</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="vba" class="page" data-nav-link="vba">
-        <div class="container vba-container">
-            <div class="hero">
-                <h1>📊 VBA 工具：Excel 中的高效魔法师</h1>
-                <p class="intro-text">专注于 Excel 内部的复杂数据处理和流程自动化，让您的电子表格焕发新生。</p>
-                
-                <h2>自动化工具流程</h2>
-
-                <div class="flowchart-container">
-                    <ul class="flowchart">
-                        <li class="step">
-                            <span class="icon">📥</span>
-                            <p>将需要的数据输入</p>
-                        </li>
-                        <li class="arrow">➡️</li>
-                        <li class="step">
-                            <span class="icon">⚙️</span>
-                            <p>自动化VBA代码处理</p>
-                        </li>
-                        <li class="arrow">➡️</li>
-                        <li class="step">
-                            <span class="icon">🔍</span>
-                            <p>自动匹配信息并返回结果</p>
-                        </li>
-                        <li class="arrow">➡️</li>
-                        <li class="step">
-                            <span class="icon">📤</span>
-                            <p>输出最终报告</p>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="key-features">
-                    <h3>⭐ VBA工具的核心价值</h3>
                     
-                    <p class="impact-text">
-                        通过VBA工具，减少了report中重复的读取查询操作，提高了focal日常工作的效率和准确率。
+                    <div class="profile-info">
+                        <h1 class="profile-title">Cara Song</h1>
+                        <p class="profile-subtitle">来自US Team的AI工具开发者，致力于通过技术创新解决日常工作中的重复劳动问题，让团队专注于更有价值的创造性工作。</p>
+                        
+                        <div class="profile-tags">
+                            <span class="tag">AI工具开发</span>
+                            <span class="tag">Python编程</span>
+                            <span class="tag">流程自动化</span>
+                            <span class="tag">数据分析</span>
+                            <span class="tag">用户体验</span>
+                        </div>
+                        
+                        <p class="profile-subtitle">专注于开发智能工具来优化工作流程，提高团队效率，将重复性任务自动化，释放团队创造力。</p>
+                    </div>
+                </div>
+                
+                <!-- 工具背景和时间线部分 -->
+                <div class="content-grid">
+                    <!-- 工具背景 -->
+                    <div class="background-card">
+                        <h2 class="card-title">工具背景</h2>
+                        <p class="background-description">
+                            US Team的CIB Task过程中每天日常流程的重复劳动居多，信息来源多样，查询时间占用多。通过开发AI工具，我们成功优化了这些流程。
+                        </p>
+                        <div class="background-stats">
+                            <div class="background-stat">
+                                <div class="stat-percentage">40%</div>
+                                <div class="stat-label">邮件往来 - 通过自动化工具减少人工处理时间</div>
+                            </div>
+                            <div class="background-stat">
+                                <div class="stat-percentage">25%</div>
+                                <div class="stat-label">Focal Report - 自动化生成和分析报告</div>
+                            </div>
+                            <div class="background-stat">
+                                <div class="stat-percentage">30%</div>
+                                <div class="stat-label">查询时间 - 智能搜索和数据处理优化</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 时间线 -->
+                    <div class="timeline-card">
+                        <h2 class="card-title">开发历程</h2>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-marker"></div>
+                                <div class="timeline-date">2025年10月初</div>
+                                <div class="timeline-content">
+                                    <p>开始使用AI Cedric开发工具，识别流程优化机会</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker"></div>
+                                <div class="timeline-date">2025年10月中旬</div>
+                                <div class="timeline-content">
+                                    <p>对工具进行迭代设计，优化用户体验和功能</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker"></div>
+                                <div class="timeline-date">2025年10月底</div>
+                                <div class="timeline-content">
+                                    <p>正式开始测试工具，收集用户反馈</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker"></div>
+                                <div class="timeline-date">2025年11月</div>
+                                <div class="timeline-content">
+                                    <p>正在升级工具，扩展更多功能和应用场景</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页面2: Python工具 - AI冒险之旅 -->
+    <div id="python" class="page">
+        <div class="container">
+            <div class="python-container">
+                <div class="hero">
+                    <div class="character">⚔️</div>
+                    <h1>AI冒险之旅</h1>
+                    <p class="story-text">勇敢的开发者啊，你即将踏上一次非凡的旅程！<br>在这个数字世界中，你将面对挑战、学习魔法（代码），最终获得改变世界的宝藏。</p>
+                    <div style="display: flex; justify-content: center; gap: 20px;">
+                        <button class="btn" onclick="showAdventurePage(2)">开始冒险 🚀</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页面3: Python成果展示 -->
+    <div id="results" class="page">
+        <div class="container">
+            <div class="results-container">
+                <h1>Python成果展示</h1>
+                
+                <!-- 视频播放器部分 -->
+                <div style="text-align: center; margin: 40px 0; padding: 30px; background: rgba(10, 10, 30, 0.7); border-radius: 15px; border: 2px solid rgba(0, 255, 255, 0.3);">
+                    <h2 style="color: #00ffff; margin-bottom: 20px;">Python工具实操演示</h2>
+                    
+                    <!-- 视频播放器 -->
+                    <video controls style="width: 100%; max-width: 800px; border-radius: 10px; box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);">
+                        <source src="pythonvideo.mp4" type="video/mp4">
+                        您的浏览器不支持视频播放。
+                    </video>
+                    
+                    <p style="color: #a0a0ff; margin-top: 15px; font-size: 1.1rem;">
+                        ✨ 效率提升30倍 • 每月节省50+小时 • 100%准确率
                     </p>
-                    
-                    <ul>
-                        <li>跨工作簿数据整合</li>
-                        <li>复杂的条件格式与公式自动生成</li>
-                        <li>基于规则的邮件和文件自动发送</li>
-                    </ul>
                 </div>
-                
-                <div class="nav-buttons centered-content">
-                    <button class="btn" onclick="showPage('results')">返回上一页</button>
-                    <button class="btn btn-next" onclick="showPage('vba-results')">继续前进：🎥 查看成果</button>
+
+                <!-- 统计信息加框框 -->
+                <div style="background: rgba(0, 255, 255, 0.1); padding: 40px; border-radius: 20px; border: 2px solid rgba(0, 255, 255, 0.3); box-shadow: 0 0 30px rgba(0, 255, 255, 0.2); margin: 40px 0;">
+                    <div class="stats">
+                        <div class="stat-item">
+                            <span class="stat-number">50+</span>
+                            <p>每月节省小时</p>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">100%</span>
+                            <p>准确率</p>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">30+</span>
+                            <p>用户覆盖</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    
-    <div id="vba-results" class="page" data-nav-link="vba">
-        <div class="container results-container">
-            <div class="hero">
-                <h1>🎥 VBA 工具成果展示</h1>
-                <p class="intro-text">观看 VBA 工具如何处理 Excel 内部的复杂逻辑，实现高效、零错误的自动化操作。</p>
 
-                <div class="video-section">
-                    <div class="video-placeholder">
-                        [这里是 **vbavideo** 播放器]
+    <!-- 页面4: VBA工具 -->
+    <div id="vba" class="page">
+        <div class="container">
+            <div class="vba-container">
+                <h1>VBA工具</h1>
+                
+                <div class="flowchart">
+                    <div class="flowchart-title">自动化工具流程</div>
+                    <div class="flowchart-content">
+                        <div class="flowchart-step">将需要的数据输入</div>
+                        <div class="flowchart-step">自动化VBA代码处理</div>
+                        <div class="flowchart-step">自动匹配信息并返回结果</div>
+                        <div class="flowchart-step">输出最终报告</div>
                     </div>
                 </div>
                 
-                <div class="demo-description">
-                    <h3>🎬 演示内容：自动报表生成与数据校验流程</h3>
-                    <p>视频展示了 VBA 工具如何快速进行跨表查询、自动匹配数据、执行校验逻辑，并一键输出格式化的最终报告。</p>
-                </div>
-            </div>
-
-            <div class="stats-container">
-                <div class="stat-item">
-                    <span class="value">6+</span>
-                    <span class="label">每月节省工时 (小时)</span>
-                </div>
-                <div class="stat-item">
-                    <span class="value">100%</span>
-                    <span class="label">数据处理准确率</span>
-                </div>
-                <div class="stat-item">
-                    <span class="value">5+</span>
-                    <span class="label">用户覆盖（部门）</span>
-                </div>
-            </div>
-            
-            <div class="nav-buttons centered-content">
-                <button class="btn" onclick="showPage('vba')">返回上一页</button>
-                <button class="btn btn-next" onclick="showPage('future')">继续前进：🚀 未来展望</button>
+                <p class="story-text">
+                    通过VBA工具，减少了report中重复的读取查询操作，提高了focal日常工作的效率和准确率。
+                </p>
             </div>
         </div>
     </div>
 
-    <div id="future" class="page" data-nav-link="future">
-        <div class="container future-container">
-            <div class="hero">
-                <h1>🚀 未来展望：持续进化的AI勇士</h1>
-                <p class="intro-text">AI工具的旅程永不停止，我们致力于不断优化和拓展功能，以适应更复杂的业务挑战。</p>
+    <!-- 页面5: VBA成果展示 -->
+    <div id="vba-results" class="page">
+        <div class="container">
+            <div class="results-container">
+                <h1>VBA成果展示</h1>
                 
-                <div class="key-features">
-                    <h3>⭐ 计划拓展部分</h3>
+                <!-- 视频播放器部分 -->
+                <div style="text-align: center; margin: 40px 0; padding: 30px; background: rgba(10, 10, 30, 0.7); border-radius: 15px; border: 2px solid rgba(0, 255, 255, 0.3);">
+                    <h2 style="color: #00ffff; margin-bottom: 20px;">VBA工具实操演示</h2>
                     
-                    <p class="impact-text">我们计划在以下部分继续拓展：</p>
+                    <!-- 视频播放器 -->
+                    <video controls style="width: 100%; max-width: 800px; border-radius: 10px; box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);">
+                        <source src="vbavideo.mp4" type="video/mp4">
+                        您的浏览器不支持视频播放。
+                    </video>
                     
+                    <p style="color: #a0a0ff; margin-top: 15px; font-size: 1.1rem;">
+                        ✨ 自动匹配信息 • 高效输出报告 • 提升工作效率
+                    </p>
+                </div>
+
+                <!-- 统计信息加框框 -->
+                <div style="background: rgba(0, 255, 255, 0.1); padding: 40px; border-radius: 20px; border: 2px solid rgba(0, 255, 255, 0.3); box-shadow: 0 0 30px rgba(0, 255, 255, 0.2); margin: 40px 0;">
+                    <div class="stats">
+                        <div class="stat-item">
+                            <span class="stat-number">6+</span>
+                            <p>每月节省小时</p>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">100%</span>
+                            <p>准确率</p>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">5+</span>
+                            <p>用户覆盖</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页面6: 展望未来 -->
+    <div id="future" class="page">
+        <div class="container">
+            <div class="future-container">
+                <h1 class="future-title">实现从"0"到"1"的跨越</h1>
+                
+                <div class="future-content">
+                    <p>我们计划在以下部分继续拓展：</p>
                     <ul>
                         <li>清关编码查询功能增加更多提醒</li>
                         <li>工具处理速度的优化</li>
                     </ul>
-                </div>
-
-                <div class="nav-buttons centered-content">
-                    <button class="btn" onclick="showPage('vba-results')">返回成果展示</button>
-                    <button class="btn btn-next" onclick="showPage('about')">返回首页</button>
+                    <p style="margin-top: 20px;">我们的目标是让每一个重复性工作都能找到自动化解决方案，让团队成员专注于更有价值的创造性工作。</p>
                 </div>
             </div>
         </div>
     </div>
-    
+
+    <!-- 冒险之旅的子页面 -->
+    <!-- 页面2: 背景故事 -->
+    <div id="adventure-page2" class="page">
+        <div class="container">
+            <h1>召唤的起源</h1>
+            <p class="story-text">
+                "在遥远的ACT王国中，我们的魔法师团队每天都要进行2小时的数据搬运...<br>
+                宝贵的创造力被浪费在重复劳动中。<br><br>
+                
+                直到有一天，我们听到了远古的召唤：<br>
+                <strong>'让工具处理重复，让人专注创造'</strong><br><br>
+                
+                于是，AI勇士踏上了这场AI工具的创造之旅！"
+            </p>
+            <div style="display: flex; justify-content: center; gap: 20px;">
+                <button class="btn btn-next" onclick="showAdventurePage(3)">继续前进 →</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页面3: 第一个怪兽 - 元素定位难题 -->
+    <div id="adventure-page3" class="page">
+        <div class="container">
+            <h1>第一场战斗：迷雾森林的定位怪兽</h1>
+            <div class="monster">👾</div>
+            <h2>元素定位难题</h2>
+            
+            <div class="battle-info">
+                <div class="problem">
+                    <h3>🐉 怪兽的能力</h3>
+                    <p>动态加载的网页元素</p>
+                    <p>复杂多变的页面结构</p>
+                    <p><strong>占用CPU资源</strong></p>
+                </div>
+                
+                <div class="solution">
+                    <h3>⚔️ 你的魔法武器</h3>
+                    <p>XPath精准定位术</p>
+                    <p>父级元素辅助定位</p>
+                </div>
+            </div>
+            
+            <div style="display: flex; justify-content: center; gap: 20px;">
+                <button class="btn btn-next" onclick="showAdventurePage(4)">击败怪兽，继续前进！</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页面4: 第二个怪兽 - 后台运行瓶颈 -->
+    <div id="adventure-page4" class="page">
+        <div class="container">
+            <h1>第二场战斗：资源沼泽的吞噬者</h1>
+            <div class="monster">🤖</div>
+            <h2>后台运行瓶颈</h2>
+            
+            <div class="battle-info">
+                <div class="problem">
+                    <h3>🐲 怪兽的能力</h3>
+                    <p>占用CPU资源</p>
+                    <p>窗口弹出式运行</p>
+                    <p><strong>用户体验差</strong></p>
+                </div>
+                
+                <div class="solution">
+                    <h3>🛡️ 你的防御神器</h3>
+                    <p>浏览器无头模式</p>
+                    <p>无痕环境运行</p>
+                </div>
+            </div>
+            
+            <div style="display: flex; justify-content: center; gap: 20px;">
+                <button class="btn btn-next" onclick="showAdventurePage(5)">战胜最终BOSS！</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页面5: 获得宝藏 -->
+    <div id="adventure-page5" class="page">
+        <div class="container">
+            <h1 style="font-size: 3.5rem; margin-bottom: 40px;">🎉 宝藏洞窟 🎉</h1>
+            <div class="treasure" style="font-size: 12rem; margin: 50px 0;">🏆</div>
+            <p class="story-text" style="font-size: 2rem; line-height: 1.6;">
+                恭喜！你成功击败了所有怪兽，<br>
+                获得了改变世界的宝藏！
+            </p>
+            
+            <div class="nav-buttons" style="display: flex; justify-content: center; margin-top: 60px;">
+                <button class="btn" onclick="showPage('python')" style="padding: 18px 50px; font-size: 1.4rem;">返回Python工具</button>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // JavaScript for page navigation
+        // 显示主页面
         function showPage(pageId) {
-            // Hide all pages
+            // 隐藏所有页面
             document.querySelectorAll('.page').forEach(page => {
                 page.classList.remove('active');
             });
-
-            // Show the requested page
-            const activePage = document.getElementById(pageId);
-            if (activePage) {
-                activePage.classList.add('active');
+            
+            // 显示目标页面
+            document.getElementById(pageId).classList.add('active');
+            
+            // 更新导航栏活动状态
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // 根据页面ID找到对应的导航链接
+            const navLinks = {
+                'about': 0,
+                'python': 1,
+                'results': 2,
+                'vba': 3,
+                'vba-results': 4,
+                'future': 5
+            };
+            
+            if (navLinks[pageId] !== undefined) {
+                document.querySelectorAll('.nav-link')[navLinks[pageId]].classList.add('active');
+            }
+            
+            // 滚动到顶部
+            window.scrollTo(0, 0);
+        }
+        
+        // 显示冒险之旅的子页面
+        function showAdventurePage(pageNumber) {
+            // 隐藏所有页面
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // 显示目标页面
+            document.getElementById('adventure-page' + pageNumber).classList.add('active');
+            
+            // 滚动到顶部
+            window.scrollTo(0, 0);
+        }
+        
+        // 可选：添加键盘导航
+        document.addEventListener('keydown', function(event) {
+            const activePage = document.querySelector('.page.active');
+            const currentPageId = activePage.id;
+            
+            // 只在冒险之旅页面启用键盘导航
+            if (currentPageId.startsWith('adventure-page')) {
+                const currentPage = parseInt(currentPageId.replace('adventure-page', ''));
                 
-                // Update active navigation link
-                document.querySelectorAll('.nav-link').forEach(link => {
-                    link.classList.remove('active');
-                });
-                
-                const navLink = document.querySelector(`.nav-link[data-page="${activePage.dataset.navLink}"]`);
-                if (navLink) {
-                    navLink.classList.add('active');
+                if (event.key === 'ArrowRight' && currentPage < 5) {
+                    showAdventurePage(currentPage + 1);
+                } else if (event.key === 'ArrowLeft' && currentPage > 2) {
+                    showAdventurePage(currentPage - 1);
                 }
             }
-        }
-
-        // Set initial page load
-        document.addEventListener('DOMContentLoaded', () => {
-            // Start at the 'python' page as requested in the initial query ("先从第二页python工具页开始")
-            showPage('python');
         });
     </script>
-
 </body>
 </html>
