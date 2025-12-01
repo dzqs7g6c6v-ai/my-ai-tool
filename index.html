@@ -1461,20 +1461,24 @@
         </div>
     </div>
 
-    <!-- 页面5: 获得宝藏 -->
-    <div id="adventure-page5" class="page">
-        <div class="container">
-            <h1 style="font-size: 3.5rem; margin-bottom: 40px; text-align: center;">🎉 宝藏洞窟 🎉</h1>
-            <div class="treasure" style="font-size: 12rem; margin: 50px 0; text-align: center;">🏆</div>
-            <p class="story-text" style="font-size: 2rem; line-height: 1.6; text-align: center; width: 100%;">
+<!-- 页面5: 获得宝藏 -->
+<div id="adventure-page5" class="page">
+    <div class="container">
+        <h1 style="font-size: 3.5rem; margin-bottom: 40px; text-align: center;">🎉 宝藏洞窟 🎉</h1>
+        <div class="treasure" style="font-size: 12rem; margin: 50px 0; text-align: center;">🏆</div>
+        
+        <!-- 修改这里：移除story-text类，直接用div包装 -->
+        <div style="display: flex; justify-content: center; width: 100%; margin: 40px 0;">
+            <p style="font-size: 2rem; line-height: 1.6; text-align: center; max-width: 800px;">
                 恭喜！你成功击败了所有怪兽，获得了改变世界的宝藏！
             </p>
-            
-            <div class="nav-buttons" style="display: flex; justify-content: center; margin-top: 60px;">
-                <button class="btn" onclick="showPage('python')" style="padding: 18px 50px; font-size: 1.4rem;">返回Python工具</button>
-            </div>
+        </div>
+        
+        <div class="nav-buttons" style="display: flex; justify-content: center; margin-top: 60px;">
+            <button class="btn" onclick="showPage('python')" style="padding: 18px 50px; font-size: 1.4rem;">返回Python工具</button>
         </div>
     </div>
+</div>
 
     <script>
         // 显示主页面
